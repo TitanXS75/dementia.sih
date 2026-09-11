@@ -1,107 +1,36 @@
 import React, { useState } from "react";
+import {
+  SunMedium,
+  Radio,
+  Image as ImageIcon,
+  MessageSquare,
+  Stethoscope,
+  ArrowRight,
+  ShieldCheck,
+  UploadCloud,
+  FileCheck2,
+} from "lucide-react";
 
 interface HeroProps {
   onOpenRoleModal: (role?: string) => void;
   onScrollTo: (id: string) => void;
 }
 
-const ELDER_PHOTOS = [
-  {
-    id: 0,
-    image: "/images/grandfather_documentary.png",
-    name: "Deuta",
-    location: "Guwahati, Assam",
-    quote: "“Sundowning restlessness calmed with familiar warmth.”",
-  },
-  {
-    id: 1,
-    image: "/images/indian_grandmother_tea.jpg",
-    name: "Aai",
-    location: "Dibrugarh, Assam",
-    quote: "“Recognized family instantly with gentle joy.”",
-  },
-  {
-    id: 2,
-    image: "/images/indian_grandfather_radio.jpg",
-    name: "Dada",
-    location: "Jorhat, Assam",
-    quote: "“Listening to old radio tunes in his mother tongue.”",
-  },
-  {
-    id: 3,
-    image: "/images/indian_family_album.jpg",
-    name: "Maa & Rupa",
-    location: "Tezpur, Assam",
-    quote: "“Recalling wedding memories through the family album.”",
-  },
-  {
-    id: 4,
-    image: "/images/indian_grandfather_assam.jpg",
-    name: "Shri Hazarika",
-    location: "Silchar, Assam",
-    quote: "“Vintage folk melodies in the morning veranda.”",
-  },
-];
+type RoleType = "patient" | "caregiver" | "asha";
 
 export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
-  const renderCard = (item: (typeof ELDER_PHOTOS)[0], heightClass: string) => {
-    const isHovered = hoveredId === item.id;
-    return (
-      <div
-        key={item.id}
-        onMouseEnter={() => setHoveredId(item.id)}
-        onMouseLeave={() => setHoveredId(null)}
-        className={`relative rounded-none overflow-hidden cursor-pointer transition-all duration-300 ease-out border border-[#1E4334]/20 ${heightClass} ${
-          isHovered
-            ? "scale-[1.08] z-30 shadow-2xl ring-2 ring-[#1E4334]"
-            : hoveredId !== null
-            ? "opacity-65 scale-[0.98]"
-            : "opacity-100 hover:shadow-md"
-        }`}
-      >
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105 rounded-none"
-        />
-        {/* Soft Ambient Gradient */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-[#142F24]/90 via-[#142F24]/20 to-transparent transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : "opacity-75"
-          }`}
-        />
-
-        {/* Text Details */}
-        <div className="absolute bottom-2.5 left-2.5 right-2.5 text-left z-20">
-          <span className="text-xs font-serif font-bold text-[#C8F028] block leading-tight">
-            {item.name}
-          </span>
-          {isHovered ? (
-            <p className="text-[10px] text-white/95 font-sans leading-tight mt-1 line-clamp-2">
-              {item.quote}
-            </p>
-          ) : (
-            <span className="text-[9px] text-white/70 block leading-none mt-0.5">
-              {item.location}
-            </span>
-          )}
-        </div>
-      </div>
-    );
-  };
+  const [activeRole, setActiveRole] = useState<RoleType>("patient");
 
   return (
     <section className="w-full bg-[#F7F5F0] pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-24 overflow-hidden relative border-b border-[#1A1814]/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Hero Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-6 flex flex-col items-start text-left">
             
             {/* Headline */}
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl 2xl:text-8xl text-primary tracking-tight font-normal leading-[1.12] mb-6 sm:mb-7">
+            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-primary tracking-tight font-normal leading-[1.12] mb-6 sm:mb-7">
               Every memory <br className="hidden sm:inline" />
               <span className="font-medium text-secondary pb-1 inline-block border-b-2 border-secondary/30">
                 matters.
@@ -109,7 +38,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-on-surface-variant mb-8 sm:mb-10 max-w-xl 2xl:max-w-2xl leading-relaxed font-normal">
+            <p className="text-lg sm:text-xl lg:text-2xl text-on-surface-variant mb-8 sm:mb-10 max-w-xl leading-relaxed font-normal">
               Gentle cognitive games, familiar family voices, and culturally rooted reminiscence therapy for elderly loved ones across Northeast India.
             </p>
 
@@ -117,35 +46,238 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
               <button
                 onClick={() => onScrollTo("how-it-works")}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#1E4334] text-[#F7F5F0] hover:bg-[#142F24] font-semibold text-sm sm:text-base transition-all shadow-xl active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-none bg-[#1E4334] text-[#F7F5F0] hover:bg-[#142F24] font-semibold text-sm sm:text-base transition-all shadow-xl active:scale-95 cursor-pointer border border-[#1E4334]"
               >
                 <span>See How It Works</span>
               </button>
 
               <button
-                onClick={() => onOpenRoleModal("patient")}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#1A1814] hover:bg-[#F7F5F0] font-semibold text-sm sm:text-base border-2 border-[#1A1814]/15 transition-all shadow-sm cursor-pointer"
+                onClick={() => onOpenRoleModal(activeRole)}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-none bg-white text-[#1A1814] hover:bg-[#F7F5F0] font-semibold text-sm sm:text-base border-2 border-[#1A1814]/15 transition-all shadow-sm cursor-pointer"
               >
                 Explore Surface Apps
               </button>
             </div>
           </div>
 
-          {/* Right Hero Visual: 5-Photo Aesthetic Square Editorial Grid */}
-          <div className="lg:col-span-5 relative flex items-center justify-center min-h-[440px] mt-4 lg:mt-0">
-            <div className="w-full max-w-[500px] mx-auto flex flex-col gap-3 p-2 relative">
+          {/* Right Hero Visual: Constant-height, clean, simple 3-Role Switcher */}
+          <div className="lg:col-span-6 w-full">
+            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-none flex flex-col h-[460px]">
               
-              {/* Row 1: 2 Spacious Square Photos */}
-              <div className="grid grid-cols-2 gap-3">
-                {renderCard(ELDER_PHOTOS[0], "h-[220px]")}
-                {renderCard(ELDER_PHOTOS[1], "h-[220px]")}
+              {/* 3 Role Navigation Tabs */}
+              <div className="grid grid-cols-3 border-b-2 border-[#1E4334] bg-[#F7F5F0] shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setActiveRole("patient")}
+                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
+                    activeRole === "patient"
+                      ? "bg-[#1E4334] text-[#C8F028]"
+                      : "text-[#1A1814] hover:bg-black/5"
+                  }`}
+                >
+                  <SunMedium className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Elder Tablet</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveRole("caregiver")}
+                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
+                    activeRole === "caregiver"
+                      ? "bg-[#1E4334] text-[#C8F028]"
+                      : "text-[#1A1814] hover:bg-black/5"
+                  }`}
+                >
+                  <MessageSquare className="w-4 h-4 shrink-0" />
+                  <span className="truncate">WhatsApp Care</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveRole("asha")}
+                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none ${
+                    activeRole === "asha"
+                      ? "bg-[#1E4334] text-[#C8F028]"
+                      : "text-[#1A1814] hover:bg-black/5"
+                  }`}
+                >
+                  <Stethoscope className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Doctor &amp; ASHA</span>
+                </button>
               </div>
 
-              {/* Row 2: 3 Square Photos */}
-              <div className="grid grid-cols-3 gap-3">
-                {renderCard(ELDER_PHOTOS[2], "h-[190px]")}
-                {renderCard(ELDER_PHOTOS[3], "h-[190px]")}
-                {renderCard(ELDER_PHOTOS[4], "h-[190px]")}
+              {/* Constant Height Body: flex-1, flex flex-col justify-between */}
+              <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between text-left overflow-hidden bg-white">
+                
+                {/* 1. ELDER TABLET MODE */}
+                {activeRole === "patient" && (
+                  <>
+                    <div>
+                      {/* Clean Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
+                        <div>
+                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
+                            সুপ্ৰভাত, দেউতা! · 08:30 AM
+                          </h3>
+                          <p className="text-xs text-on-surface-variant font-sans">
+                            Calm daylight orientation clock for the bedside
+                          </p>
+                        </div>
+                        <span className="text-[10px] font-bold text-[#1E4334] bg-[#C8F028] px-2 py-0.5 border border-[#1E4334]/20 uppercase">
+                          Living Room
+                        </span>
+                      </div>
+
+                      {/* 2 Simple Big Buttons */}
+                      <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/20">
+                          <Radio className="w-5 h-5 text-[#1E4334] mb-2" />
+                          <h4 className="text-sm font-semibold text-[#1A1814]">Nostalgia Radio</h4>
+                          <p className="text-xs text-on-surface-variant mt-0.5">Classic Assamese songs</p>
+                        </div>
+
+                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/20">
+                          <ImageIcon className="w-5 h-5 text-[#1E4334] mb-2" />
+                          <h4 className="text-sm font-semibold text-[#1A1814]">Family Photos</h4>
+                          <p className="text-xs text-on-surface-variant mt-0.5">Familiar faces &amp; memories</p>
+                        </div>
+                      </div>
+
+                      {/* Simple Calm Telemetry */}
+                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15">
+                        <ShieldCheck className="w-4 h-4 text-[#1E4334] shrink-0" />
+                        <span>Sundowning status: <strong>Peaceful &amp; Calm</strong></span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button
+                      onClick={() => onOpenRoleModal("patient")}
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                    >
+                      <span>Launch Bedside Surface</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+
+                {/* 2. FAMILY WHATSAPP MODE */}
+                {activeRole === "caregiver" && (
+                  <>
+                    <div>
+                      {/* Clean Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
+                        <div>
+                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
+                            Family WhatsApp Care Circle
+                          </h3>
+                          <p className="text-xs text-on-surface-variant font-sans">
+                            No app download required for family members
+                          </p>
+                        </div>
+                        <span className="text-[10px] font-bold text-[#1E4334] bg-[#C8F028] px-2 py-0.5 border border-[#1E4334]/20 uppercase">
+                          WhatsApp Sync
+                        </span>
+                      </div>
+
+                      {/* WhatsApp Simulation Digest */}
+                      <div className="space-y-3 mb-4">
+                        <div className="p-3 bg-[#F7F5F0] border-l-4 border-[#1E4334] border-t border-r border-b border-[#1E4334]/15">
+                          <span className="text-[11px] font-semibold text-[#1E4334] block mb-0.5">
+                            Morning Family Update · 08:35 AM
+                          </span>
+                          <p className="text-xs text-[#1A1814] leading-relaxed">
+                            Deuta enjoyed his morning radio session. High familiarity score (98%) and zero restlessness.
+                          </p>
+                        </div>
+
+                        <div className="p-3 bg-white border border-[#1E4334]/20 flex items-center justify-between">
+                          <div className="flex items-center gap-2.5">
+                            <UploadCloud className="w-4 h-4 text-[#1E4334] shrink-0" />
+                            <div>
+                              <div className="text-xs font-semibold text-[#1A1814]">Upload Family Photo</div>
+                              <div className="text-[11px] text-on-surface-variant">Sends instantly to his bedside screen</div>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-medium text-[#1E4334] bg-[#C8F028]/40 px-2 py-0.5 border border-[#1E4334]/20">
+                            1-Tap
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button
+                      onClick={() => onOpenRoleModal("caregiver")}
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                    >
+                      <span>Preview Family WhatsApp Mode</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+
+                {/* 3. DOCTOR & ASHA MODE */}
+                {activeRole === "asha" && (
+                  <>
+                    <div>
+                      {/* Clean Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
+                        <div>
+                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
+                            Frontline Doctor &amp; ASHA Triage
+                          </h3>
+                          <p className="text-xs text-on-surface-variant font-sans">
+                            Door-to-door cognitive screening for rural Northeast
+                          </p>
+                        </div>
+                        <span className="text-[10px] font-bold text-[#1E4334] bg-[#C8F028] px-2 py-0.5 border border-[#1E4334]/20 uppercase">
+                          100% Offline
+                        </span>
+                      </div>
+
+                      {/* 2 Stat Cards */}
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/20 text-center">
+                          <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
+                            Speech &amp; Motor Test
+                          </div>
+                          <div className="font-mono text-xl font-bold text-[#1E4334]">94.2%</div>
+                          <div className="text-[10px] text-[#1E4334]">Stable baseline</div>
+                        </div>
+
+                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/20 text-center">
+                          <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
+                            Cultural Cue Recall
+                          </div>
+                          <div className="font-mono text-xl font-bold text-[#1E4334]">8 / 10</div>
+                          <div className="text-[10px] text-[#1E4334]">High recognition</div>
+                        </div>
+                      </div>
+
+                      {/* Report summary */}
+                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15">
+                        <FileCheck2 className="w-4 h-4 text-[#1E4334] shrink-0" />
+                        <span>Bilingual clinical summary ready for doctor review</span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button
+                      onClick={() => onOpenRoleModal("asha")}
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                    >
+                      <span>Preview Clinical Triage Tool</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+
+              </div>
+              
+              {/* Bottom Subtle Hint */}
+              <div className="bg-[#F7F5F0] border-t border-[#1E4334]/15 px-4 py-2 text-center text-[11px] text-on-surface-variant font-medium shrink-0">
+                Click any tab above to switch role view
               </div>
 
             </div>
@@ -156,4 +288,3 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
     </section>
   );
 }
-
