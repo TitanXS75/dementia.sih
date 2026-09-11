@@ -127,5 +127,5 @@ SmritiSetu natively supports:
 
 ## License & Acknowledgements
 
-Built with deep reverence for Indian families and elder dignity.  
+Dedicated to elder dignity across India.  
 Developed for the **Smart India Hackathon (SIH)**.

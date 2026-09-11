@@ -127,11 +127,9 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
             <span className="px-2 py-0.5 rounded-full bg-white/10 text-white font-medium border border-white/15 text-[11px]">
               Built for SIH
             </span>
-            <span className="text-white/30">·</span>
-            <span>Dedicated to elder dignity across India</span>
           </div>
           <div className="flex items-center text-white/80">
-            <span>Built with deep reverence for Indian families</span>
+            <span>Dedicated to elder dignity across India</span>
           </div>
         </div>
 

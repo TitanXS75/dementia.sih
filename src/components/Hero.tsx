@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SunMedium,
   Radio,
@@ -17,6 +17,43 @@ type RoleType = "patient" | "asha";
 
 export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
   const [activeRole, setActiveRole] = useState<RoleType>("patient");
+
+  const [currentTime, setCurrentTime] = useState<string>(() => {
+    return new Date().toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+  });
+
+  const [greeting, setGreeting] = useState<string>(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "সুপ্ৰভাত, দেউতা!";
+    if (hour < 17) return "শুভ অপৰাহ্ন, দেউতা!";
+    return "শুভ সন্ধ্যা, দেউতা!";
+  });
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+      );
+      const hour = now.getHours();
+      if (hour < 12) setGreeting("সুপ্ৰভাত, দেউতা!");
+      else if (hour < 17) setGreeting("শুভ অপৰাহ্ন, দেউতা!");
+      else setGreeting("শুভ সন্ধ্যা, দেউতা!");
+    };
+
+    const timer = setInterval(updateClock, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="w-full bg-[#F7F5F0] pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-24 overflow-hidden relative border-b border-[#1A1814]/10">
@@ -100,11 +137,15 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                       {/* Clean Header */}
                       <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
                         <div>
-                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
-                            সুপ্ৰভাত, দেউতা! · 08:30 AM
+                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814] flex items-center gap-2 flex-wrap">
+                            <span>{greeting}</span>
+                            <span className="text-[#1E4334]/40">·</span>
+                            <span className="font-mono text-base sm:text-lg font-bold text-[#1E4334] tracking-tight">
+                              {currentTime}
+                            </span>
                           </h3>
-                          <p className="text-xs text-on-surface-variant font-sans">
-                            Calm daylight orientation clock for the bedside
+                          <p className="text-xs text-on-surface-variant font-sans mt-0.5">
+                            Live daylight orientation clock for the bedside
                           </p>
                         </div>
                         <span className="text-[10px] font-bold text-[#1E4334] bg-[#C8F028] px-2 py-0.5 border border-[#1E4334]/20 uppercase">

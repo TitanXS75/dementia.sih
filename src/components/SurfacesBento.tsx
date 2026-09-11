@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Users, Stethoscope, Music, Image as ImageIcon, SunMedium } from "lucide-react";
 
 interface SurfacesBentoProps {
@@ -6,6 +6,26 @@ interface SurfacesBentoProps {
 }
 
 export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
+  const [liveTime, setLiveTime] = useState<string>(() => {
+    return new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLiveTime(
+        new Date().toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <section id="surfaces" className="w-full bg-[#F7F5F0] py-14 sm:py-20 overflow-hidden border-b border-[#1A1814]/10 relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
@@ -162,7 +182,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                   <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-[11px] text-white/70 font-sans">
                     <div className="flex items-center gap-2">
                       <SunMedium className="w-3.5 h-3.5 text-[#C8F028]" />
-                      <span className="font-medium text-white">সুপ্ৰভাত · 8:15 AM</span>
+                      <span className="font-medium text-white">সুপ্ৰভাত · {liveTime}</span>
                     </div>
                     <span className="text-[#C8F028]/90 font-medium">Living Room Tablet</span>
                   </div>
