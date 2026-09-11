@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 interface CtaSectionProps {
   onOpenRoleModal: () => void;
@@ -66,10 +66,9 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3.5 rounded-2xl bg-[#C8F028] text-[#1A1814] font-semibold text-sm hover:bg-white transition-all shadow-md shrink-0 flex items-center justify-center gap-2"
+                  className="px-8 py-3.5 rounded-2xl bg-[#C8F028] text-[#1A1814] font-semibold text-sm hover:bg-white transition-all shadow-md shrink-0 flex items-center justify-center"
                 >
                   <span>Submit</span>
-                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </form>
@@ -85,10 +84,9 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
           {/* Quick Platform Launch Button */}
           <button
             onClick={onOpenRoleModal}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-[#1E4334] font-semibold text-sm hover:bg-[#C8F028] transition-all shadow-xl active:scale-95"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#1E4334] font-semibold text-sm hover:bg-[#C8F028] transition-all shadow-xl active:scale-95"
           >
             <span>Explore All 3 Surfaces Live</span>
-            <ArrowRight className="w-4 h-4" />
           </button>
 
         </div>

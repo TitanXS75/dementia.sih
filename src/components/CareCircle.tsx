@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { User, Users, ClipboardCheck, ArrowRight } from "lucide-react";
+import { User, Users, ClipboardCheck } from "lucide-react";
 
 interface CareCircleProps {
   onOpenRoleModal: (role: string) => void;
@@ -87,10 +87,9 @@ export default function CareCircle({ onOpenRoleModal }: CareCircleProps) {
 
                 <button
                   onClick={() => onOpenRoleModal(card.id)}
-                  className="inline-flex items-center gap-2 font-semibold text-xs sm:text-sm text-primary hover:text-secondary transition-colors group focus:outline-none"
+                  className="inline-flex items-center font-semibold text-xs sm:text-sm text-primary hover:text-secondary transition-colors focus:outline-none"
                 >
                   <span>{card.cta}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform text-secondary" />
                 </button>
               </div>
             );

@@ -4,7 +4,6 @@ import {
   Radio,
   Image as ImageIcon,
   Stethoscope,
-  ArrowRight,
   ShieldCheck,
   FileCheck2,
 } from "lucide-react";
@@ -138,10 +137,9 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("patient")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-none active:scale-[0.99]"
                     >
                       <span>Launch Bedside Surface</span>
-                      <ArrowRight className="w-4 h-4" />
                     </button>
                   </>
                 )}
@@ -194,10 +192,9 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("asha")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-none active:scale-[0.99]"
                     >
                       <span>Preview Clinical Triage Tool</span>
-                      <ArrowRight className="w-4 h-4" />
                     </button>
                   </>
                 )}

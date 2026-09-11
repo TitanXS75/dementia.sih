@@ -15,7 +15,6 @@ import {
   Sparkles,
   WifiOff,
   ShieldCheck,
-  ArrowRight,
   Heart,
 } from "lucide-react";
 

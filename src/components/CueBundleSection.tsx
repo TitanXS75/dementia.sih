@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, Clock, Radio, ShieldCheck, BookOpen, Wifi } from "lucide-react";
+import { Clock, Radio, ShieldCheck, BookOpen, Wifi } from "lucide-react";
 
 interface CueBundleSectionProps {
   onOpenRoleModal: (role?: string) => void;
