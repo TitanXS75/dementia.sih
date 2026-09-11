@@ -11,11 +11,26 @@ import {
 interface HeroProps {
   onOpenRoleModal: (role?: string) => void;
   onScrollTo: (id: string) => void;
+  isReady?: boolean;
 }
 
 type RoleType = "patient" | "asha";
 
-export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
+export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: HeroProps) {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    if (isReady) {
+      const timer = setTimeout(() => setAnimate(true), 60);
+      return () => clearTimeout(timer);
+    }
+  }, [isReady]);
+
+  // Fallback so it is never hidden under any circumstance
+  useEffect(() => {
+    const fallback = setTimeout(() => setAnimate(true), 2400);
+    return () => clearTimeout(fallback);
+  }, []);
   const [activeRole, setActiveRole] = useState<RoleType>("patient");
 
   const [currentTime, setCurrentTime] = useState<string>(() => {
@@ -56,15 +71,17 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
   }, []);
 
   return (
-    <section className="w-full bg-[#F7F5F0] pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-24 overflow-hidden relative border-b border-[#1A1814]/10">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section className="w-full min-h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex flex-col justify-center bg-[#F7F5F0] py-8 sm:py-12 lg:py-16 overflow-hidden relative border-b border-[#1A1814]/10">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Hero Content */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             
             {/* Headline */}
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-primary tracking-tight font-normal leading-[1.12] mb-6 sm:mb-7">
+            <h1 className={`font-serif text-4xl sm:text-6xl lg:text-7xl text-primary tracking-tight font-normal leading-[1.12] mb-6 sm:mb-7 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}>
               Every memory <br className="hidden sm:inline" />
               <span className="font-medium text-secondary pb-1 inline-block border-b-2 border-secondary/30">
                 matters.
@@ -72,12 +89,16 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-on-surface-variant mb-8 sm:mb-10 max-w-xl leading-relaxed font-normal">
+            <p className={`text-lg sm:text-xl lg:text-2xl text-on-surface-variant mb-8 sm:mb-10 max-w-xl leading-relaxed font-normal transition-all duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}>
               Gentle cognitive games, familiar family voices, and culturally rooted reminiscence therapy for elderly loved ones across Northeast India.
             </p>
 
             {/* CTA Button Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+            <div className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto transition-all duration-1000 delay-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}>
               <button
                 onClick={() => onScrollTo("how-it-works")}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-none bg-[#1E4334] text-[#F7F5F0] hover:bg-[#142F24] font-semibold text-sm sm:text-base transition-all shadow-xl active:scale-95 cursor-pointer border border-[#1E4334]"
@@ -95,7 +116,9 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
           </div>
 
           {/* Right Hero Visual: 2-Role Interactive Switcher (Constant Height, Simple) */}
-          <div className="lg:col-span-6 w-full">
+          <div className={`lg:col-span-6 w-full transition-all duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            animate ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-[0.98]"
+          }`}>
             <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-none flex flex-col h-[440px]">
               
               {/* 2 Role Navigation Tabs */}
