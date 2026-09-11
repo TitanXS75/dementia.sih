@@ -69,7 +69,7 @@ export default function OfflineRegional() {
           })}
         </div>
 
-        {/* WhatsApp & SMS Fallback Banner */}
+        {/* Emergency SMS Fallback Banner */}
         <div className="mt-10 sm:mt-12 p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-surface-container-lowest border border-surface-container-high shadow-md flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start sm:items-center gap-3.5 sm:gap-4">
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-secondary-fixed/40 flex items-center justify-center text-secondary shrink-0 mt-0.5 sm:mt-0">
@@ -80,7 +80,7 @@ export default function OfflineRegional() {
                 Critical Safety Alert Fallback
               </h4>
               <p className="text-xs sm:text-sm text-on-surface-variant mt-0.5">
-                Unacknowledged medicines or sudden cognitive drops trigger WhatsApp Cloud API or Fast2SMS directly to the
+                Unacknowledged medicines or sudden cognitive drops trigger immediate SMS alerts directly to the
                 caregiver and local ASHA worker even if mobile data is toggled off.
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function OfflineRegional() {
 
           <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
             <span className="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-primary-fixed text-primary font-semibold">
-              WhatsApp Alert
+              Emergency Alert
             </span>
             <span className="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-secondary-fixed text-secondary font-semibold">
               SMS Gateway

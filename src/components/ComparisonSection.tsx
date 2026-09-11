@@ -24,10 +24,10 @@ export default function ComparisonSection() {
       smriti: "100% offline-ready on basic tablet",
     },
     {
-      feature: "Family WhatsApp Digest Integration",
+      feature: "Family Daily Digest Integration",
       generic: "Isolated to app with paywalled reports",
       hospital: "Bi-monthly printed hospital summary",
-      smriti: "Daily evening WhatsApp peace-of-mind digest",
+      smriti: "Daily evening family peace-of-mind digest",
     },
   ];
 

@@ -25,7 +25,7 @@ export default function HowItWorks() {
     },
     {
       num: "04",
-      title: "Family WhatsApp Calm",
+      title: "Family Peace of Mind",
       tag: "100% Camera-Free",
       desc: "Family gets peaceful evening status digests, while doctors receive exportable clinical trends.",
       img: "/images/indian_grandmother_tea.jpg",

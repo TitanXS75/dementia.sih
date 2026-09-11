@@ -24,7 +24,7 @@ export default function PainPointsSection() {
     },
     {
       num: "06",
-      text: "Doctor slips, prescription photos, and updates were scattered across five chaotic WhatsApp chats",
+      text: "Doctor slips, prescription photos, and updates were scattered across chaotic group chats",
     },
   ];
 

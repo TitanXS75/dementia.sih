@@ -241,17 +241,15 @@ export default function FaqPage({
                 Have a specific question about your loved one?
               </h3>
               <p className="text-sm text-white/75 font-normal font-sans">
-                Our care advisors are available on WhatsApp to guide your family through gentle dementia setup.
+                Our care advisors are available to guide your family through gentle dementia setup.
               </p>
             </div>
             <a
-              href="https://wa.me/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:support@smritisetu.in"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#C8F028] text-[#1A1814] font-semibold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md shrink-0"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Chat on WhatsApp</span>
+              <span>Contact Care Advisors</span>
             </a>
           </div>
 

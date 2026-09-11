@@ -60,7 +60,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
                   type="text"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  placeholder="WhatsApp Number or Email"
+                  placeholder="Phone Number or Email"
                   className="flex-1 px-5 py-3.5 rounded-2xl bg-[#F7F5F0]/90 text-[#1A1814] placeholder:text-[#1A1814]/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8F028]"
                   required
                 />
@@ -77,7 +77,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
             {submitted && (
               <div className="mt-4 p-3 rounded-xl bg-[#C8F028]/20 border border-[#C8F028] text-xs font-semibold text-[#C8F028] flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Thank you! Our care team will reach out directly on WhatsApp.</span>
+                <span>Thank you! Our care team will reach out directly.</span>
               </div>
             )}
           </div>

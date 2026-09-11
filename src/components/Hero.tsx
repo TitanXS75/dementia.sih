@@ -3,11 +3,9 @@ import {
   SunMedium,
   Radio,
   Image as ImageIcon,
-  MessageSquare,
   Stethoscope,
   ArrowRight,
   ShieldCheck,
-  UploadCloud,
   FileCheck2,
 } from "lucide-react";
 
@@ -16,7 +14,7 @@ interface HeroProps {
   onScrollTo: (id: string) => void;
 }
 
-type RoleType = "patient" | "caregiver" | "asha";
+type RoleType = "patient" | "asha";
 
 export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
   const [activeRole, setActiveRole] = useState<RoleType>("patient");
@@ -60,53 +58,40 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
             </div>
           </div>
 
-          {/* Right Hero Visual: Constant-height, clean, simple 3-Role Switcher */}
+          {/* Right Hero Visual: 2-Role Interactive Switcher (Constant Height, Simple) */}
           <div className="lg:col-span-6 w-full">
-            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-none flex flex-col h-[460px]">
+            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-none flex flex-col h-[440px]">
               
-              {/* 3 Role Navigation Tabs */}
-              <div className="grid grid-cols-3 border-b-2 border-[#1E4334] bg-[#F7F5F0] shrink-0">
+              {/* 2 Role Navigation Tabs */}
+              <div className="grid grid-cols-2 border-b-2 border-[#1E4334] bg-[#F7F5F0] shrink-0">
                 <button
                   type="button"
                   onClick={() => setActiveRole("patient")}
-                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
+                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
                     activeRole === "patient"
                       ? "bg-[#1E4334] text-[#C8F028]"
                       : "text-[#1A1814] hover:bg-black/5"
                   }`}
                 >
                   <SunMedium className="w-4 h-4 shrink-0" />
-                  <span className="truncate">Elder Tablet</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveRole("caregiver")}
-                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
-                    activeRole === "caregiver"
-                      ? "bg-[#1E4334] text-[#C8F028]"
-                      : "text-[#1A1814] hover:bg-black/5"
-                  }`}
-                >
-                  <MessageSquare className="w-4 h-4 shrink-0" />
-                  <span className="truncate">WhatsApp Care</span>
+                  <span>Elder Bedside Tablet</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setActiveRole("asha")}
-                  className={`py-3.5 px-2 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none ${
+                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer rounded-none ${
                     activeRole === "asha"
                       ? "bg-[#1E4334] text-[#C8F028]"
                       : "text-[#1A1814] hover:bg-black/5"
                   }`}
                 >
                   <Stethoscope className="w-4 h-4 shrink-0" />
-                  <span className="truncate">Doctor &amp; ASHA</span>
+                  <span>Doctor &amp; Frontline ASHA</span>
                 </button>
               </div>
 
-              {/* Constant Height Body: flex-1, flex flex-col justify-between */}
+              {/* Constant-Height Body */}
               <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between text-left overflow-hidden bg-white">
                 
                 {/* 1. ELDER TABLET MODE */}
@@ -128,7 +113,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                         </span>
                       </div>
 
-                      {/* 2 Simple Big Buttons */}
+                      {/* 2 Big Simple Buttons */}
                       <div className="grid grid-cols-2 gap-3 mb-4">
                         <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/20">
                           <Radio className="w-5 h-5 text-[#1E4334] mb-2" />
@@ -146,7 +131,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                       {/* Simple Calm Telemetry */}
                       <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15">
                         <ShieldCheck className="w-4 h-4 text-[#1E4334] shrink-0" />
-                        <span>Sundowning status: <strong>Peaceful &amp; Calm</strong></span>
+                        <span>Sundowning status: <strong>Peaceful &amp; Calm (98%)</strong></span>
                       </div>
                     </div>
 
@@ -161,63 +146,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                   </>
                 )}
 
-                {/* 2. FAMILY WHATSAPP MODE */}
-                {activeRole === "caregiver" && (
-                  <>
-                    <div>
-                      {/* Clean Header */}
-                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
-                        <div>
-                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
-                            Family WhatsApp Care Circle
-                          </h3>
-                          <p className="text-xs text-on-surface-variant font-sans">
-                            No app download required for family members
-                          </p>
-                        </div>
-                        <span className="text-[10px] font-bold text-[#1E4334] bg-[#C8F028] px-2 py-0.5 border border-[#1E4334]/20 uppercase">
-                          WhatsApp Sync
-                        </span>
-                      </div>
-
-                      {/* WhatsApp Simulation Digest */}
-                      <div className="space-y-3 mb-4">
-                        <div className="p-3 bg-[#F7F5F0] border-l-4 border-[#1E4334] border-t border-r border-b border-[#1E4334]/15">
-                          <span className="text-[11px] font-semibold text-[#1E4334] block mb-0.5">
-                            Morning Family Update · 08:35 AM
-                          </span>
-                          <p className="text-xs text-[#1A1814] leading-relaxed">
-                            Deuta enjoyed his morning radio session. High familiarity score (98%) and zero restlessness.
-                          </p>
-                        </div>
-
-                        <div className="p-3 bg-white border border-[#1E4334]/20 flex items-center justify-between">
-                          <div className="flex items-center gap-2.5">
-                            <UploadCloud className="w-4 h-4 text-[#1E4334] shrink-0" />
-                            <div>
-                              <div className="text-xs font-semibold text-[#1A1814]">Upload Family Photo</div>
-                              <div className="text-[11px] text-on-surface-variant">Sends instantly to his bedside screen</div>
-                            </div>
-                          </div>
-                          <span className="text-[10px] font-medium text-[#1E4334] bg-[#C8F028]/40 px-2 py-0.5 border border-[#1E4334]/20">
-                            1-Tap
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <button
-                      onClick={() => onOpenRoleModal("caregiver")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-none active:scale-[0.99]"
-                    >
-                      <span>Preview Family WhatsApp Mode</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </>
-                )}
-
-                {/* 3. DOCTOR & ASHA MODE */}
+                {/* 2. DOCTOR & ASHA MODE */}
                 {activeRole === "asha" && (
                   <>
                     <div>
@@ -237,7 +166,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
                       </div>
 
                       {/* 2 Stat Cards */}
-                      <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div className="grid grid-cols-2 gap-3 mb-4">
                         <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/20 text-center">
                           <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
                             Speech &amp; Motor Test
@@ -277,7 +206,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo }: HeroProps) {
               
               {/* Bottom Subtle Hint */}
               <div className="bg-[#F7F5F0] border-t border-[#1E4334]/15 px-4 py-2 text-center text-[11px] text-on-surface-variant font-medium shrink-0">
-                Click any tab above to switch role view
+                Switch tabs above to preview the Elder Bedside Tablet and Clinical Triage modes
               </div>
 
             </div>

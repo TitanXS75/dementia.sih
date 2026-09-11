@@ -210,7 +210,7 @@ export default function RoleModal({ isOpen, onClose, initialRole = "patient" }: 
                     LASI-DAD Metrics
                   </span>
                   <span className="px-3 py-1 rounded-full bg-surface text-[11px] font-semibold text-secondary border border-secondary/20 shadow-sm">
-                    WhatsApp Fallback
+                    SMS Fallback
                   </span>
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function RoleModal({ isOpen, onClose, initialRole = "patient" }: 
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-container-high text-primary">Alerts</span>
                   </div>
                   <p className="text-xs text-on-surface-variant leading-relaxed">
-                    Unconfirmed reminders automatically trigger SMS/WhatsApp notifications to designated family members after an adjustable grace period.
+                    Unconfirmed reminders automatically trigger SMS notifications to designated family members after an adjustable grace period.
                   </p>
                 </div>
               </div>

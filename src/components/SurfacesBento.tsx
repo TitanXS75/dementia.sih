@@ -45,7 +45,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                 Family Caregiver
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed font-normal mb-4 font-sans">
-                Uploads family heirloom photos, voice notes, and receives daily familiarity updates via WhatsApp.
+                Uploads family heirloom photos, voice notes, and receives daily familiarity updates via the family portal.
               </p>
 
               <div className="flex flex-wrap gap-2 mb-5">
@@ -53,7 +53,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                   Heirloom photo cues
                 </span>
                 <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
-                  WhatsApp morning score
+                  Daily morning score
                 </span>
                 <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Sundowning alerts

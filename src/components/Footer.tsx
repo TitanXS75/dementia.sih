@@ -27,7 +27,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
               </li>
               <li>
                 <button onClick={() => onOpenRoleModal("caregiver")} className="hover:text-white transition-colors text-left">
-                  Caregiver WhatsApp App
+                  Caregiver Family Portal
                 </button>
               </li>
               <li>
@@ -111,7 +111,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors">
-                  WhatsApp Support Helpline
+                  Care Support Helpline
                 </a>
               </li>
             </ul>
