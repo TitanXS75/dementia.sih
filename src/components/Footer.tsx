@@ -8,7 +8,7 @@ interface FooterProps {
 
 export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: FooterProps) {
   return (
-    <footer className="w-full bg-[#142F24] text-[#F7F5F0] pt-14 pb-12 border-t border-white/10">
+    <footer className="w-full bg-[#12241C] text-[#FAF7F2] pt-14 pb-12 border-t border-white/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         {/* Footer Navigation Columns */}
@@ -16,7 +16,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
           
           {/* Col 1: Our Product */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B] mb-4">
               Our Product
             </h4>
             <ul className="space-y-2.5 text-sm font-normal text-white/75 font-sans">
@@ -52,7 +52,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
 
           {/* Col 2: Dialects */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B] mb-4">
               Dialects
             </h4>
             <ul className="space-y-2.5 text-sm font-normal text-white/75 font-sans">
@@ -66,7 +66,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
 
           {/* Col 3: Legal */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B] mb-4">
               Legal
             </h4>
             <ul className="space-y-2.5 text-sm font-normal text-white/75 font-sans">
@@ -95,7 +95,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
 
           {/* Col 4: Connect */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F59E0B] mb-4">
               Connect
             </h4>
             <ul className="space-y-2.5 text-sm font-medium text-white/75">

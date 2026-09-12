@@ -16,22 +16,24 @@ SmritiSetu's interface must feel like:
 
 ---
 
-## 2. Color Palette & Tokens
-The color palette is deliberately chosen to evoke tranquility, regional nature (Assam tea gardens, earth, morning daylight), and high clinical contrast without aggressive clinical whites or pitch blacks.
+## 2. Color Palette & Tokens (Suryodaya & Chandan)
+The color palette is deliberately calibrated for ocular comfort in aging eyes (compensating for lens yellowing, photophobia, and reduced contrast sensitivity) while evoking tranquility, Indian morning daylight, warm verandas, and regional tea-garden nature.
 
 | Token Name | Hex Code | Purpose & Usage |
 |---|---|---|
-| **Cream Canvas** | `#F7F5F0` | Primary page background; warm, non-glare alternative to pure white |
-| **Deep Forest Olive** | `#1E4334` | Primary brand green; calm, dignified, earthy; used in hero CTAs, card frames, and headers |
-| **Deep Forest Dark** | `#142F24` | Footer background and dark container surfaces; grounding, reassuring |
-| **Lime Radiance** | `#C8F028` | Accent highlight; eye-catching high visibility indicator; used on dark green backgrounds |
-| **Warm Charcoal** | `#1A1814` | Primary typography color; soft and legible, avoiding harsh contrast of pure black |
-| **Surface Variant** | `#1A1814` (70% opacity) | Secondary copy, metadata, and supporting explanations |
-| **Border Subtle** | `#1E4334` (12%–20% opacity) | Hairline borders providing clean structural separation without visual noise |
+| **Sandalwood Canvas** | `#FAF7F2` | Primary page background; warm, non-glare, linen/sandalwood alternative to sterile white |
+| **Heritage Pine** | `#1B382B` | Primary brand tone; noble, dignified, grounding; used in CTAs, headers, and card borders |
+| **Roasted Pine Dark** | `#12241C` | Footer background and deep grounding surfaces; reassuring, dark without coldness |
+| **Surya / Kesar Gold** | `#D97706` / `#E58A18` | Accent highlight; auspicious morning dawn gold, high visibility without optical glare |
+| **Earthen Terracotta** | `#B24A2B` | Secondary warmth; clay pot / warm courtyard brick tone for tactile badges and alerts |
+| **Warm Charcoal** | `#1F1914` | Primary typography color; soft on the eyes while achieving WCAG AAA contrast |
+| **Surface Card** | `#F5EFEB` / `#FFFFFF` | Elevated tactile paper card surfaces |
+| **Border Subtle** | `#1B382B` (10%–16% opacity) | Hairline borders providing clean structural separation without visual noise |
 
 ### Strict Prohibitions
-- **NO Sudden Pure Black (`#000000`) Sections**: Abrupt dark sections cause visual shock and disorientation. Dark sections must always use deep forest green (`#1E4334` or `#142F24`).
-- **NO Generic Primary Colors**: Avoid bright standard red, blue, or cyan. All alerts and highlights must use calibrated tones.
+- **NO Sudden Pure Black (`#000000`) Sections**: Abrupt pitch-black sections cause disorientation. Dark sections must always use deep roasted heritage green (`#12241C` or `#1B382B`).
+- **NO Neon/Acid High-Frequency Colors (`#C8F028` etc.)**: Jarring electronic greens create ocular fatigue and vibration in elderly eyes. Always use warm golden amber (`#D97706` / `#E58A18`) or terracotta (`#B24A2B`).
+- **NO Generic Primary Colors**: Avoid raw digital primary red, cyan, or stark royal blue. All alerts and highlights must use calibrated earthen tones.
 
 ---
 

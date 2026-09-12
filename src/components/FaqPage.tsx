@@ -85,26 +85,26 @@ export default function FaqPage({
     : faqs.filter((f) => f.category === selectedCategory);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1F1914] font-sans">
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full bg-[#F7F5F0]/95 backdrop-blur-md border-b border-[#1E4334]/10">
+      <header className="sticky top-0 z-50 w-full bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#1B382B]/10">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-6">
-          {/* Logo & Back to Home */}
+          {/* Left: Back Arrow + Logo */}
           <div className="flex items-center gap-4">
             <button
               onClick={onNavigateHome}
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#1A1814]/80 hover:text-[#1E4334] p-2 rounded-full hover:bg-[#1E4334]/5 transition-all"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#1F1914]/80 hover:text-[#1B382B] p-2 rounded-full hover:bg-[#1B382B]/5 transition-all"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Back to Home</span>
             </button>
 
-            <div className="h-6 w-px bg-[#1E4334]/15 hidden sm:block" />
+            <div className="h-6 w-px bg-[#1B382B]/15 hidden sm:block" />
 
             <button onClick={onNavigateHome} className="flex items-center focus:outline-none group">
-              <span className="font-serif text-xl font-bold tracking-tight text-[#1E4334] group-hover:text-[#142F24] transition-colors">
-                SmritiSetu
+              <span className="font-serif text-xl font-bold tracking-tight text-[#1B382B] group-hover:text-[#12241C] transition-colors">
+                SmritiSetu<span className="text-[#E58A18]">.</span>
               </span>
             </button>
           </div>
@@ -115,15 +115,15 @@ export default function FaqPage({
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-xs font-medium text-[#1A1814] border border-[#1E4334]/15 hover:bg-[#F7F5F0] transition-all shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-xs font-medium text-[#1F1914] border border-[#1B382B]/15 hover:bg-[#FAF7F2] transition-all shadow-xs"
               >
-                <Globe className="w-3.5 h-3.5 text-[#1E4334]" />
+                <Globe className="w-3.5 h-3.5 text-[#1B382B]" />
                 <span>{activeLangObj.native}</span>
                 <ChevronDown className="w-3 h-3 text-on-surface-variant" />
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-[#1E4334]/15 p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-[#1B382B]/15 p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-3 py-1.5 text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
                     Select Language
                   </div>
@@ -136,8 +136,8 @@ export default function FaqPage({
                       }}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-left transition-colors ${
                         currentLang === lang.code
-                          ? "bg-[#1E4334] text-white font-medium"
-                          : "text-[#1A1814] hover:bg-[#F7F5F0]"
+                          ? "bg-[#1B382B] text-white font-medium"
+                          : "text-[#1F1914] hover:bg-[#FAF7F2]"
                       }`}
                     >
                       <span>{lang.label}</span>
@@ -151,7 +151,7 @@ export default function FaqPage({
             {/* Platform CTA */}
             <button
               onClick={() => onOpenRoleModal()}
-              className="px-5 py-2.5 rounded-full bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
+              className="px-5 py-2.5 rounded-full bg-[#1B382B] text-white hover:bg-[#12241C] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
             >
               Explore Platform
             </button>
@@ -165,10 +165,10 @@ export default function FaqPage({
           
           {/* Header */}
           <div className="text-left mb-12">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1E4334] mb-3">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1B382B] mb-3">
               Help &amp; Knowledge Center
             </div>
-            <h1 className="font-serif text-4xl sm:text-6xl text-[#1E4334] tracking-tight font-normal leading-[1.12] mb-4">
+            <h1 className="font-serif text-4xl sm:text-6xl text-[#1B382B] tracking-tight font-normal leading-[1.12] mb-4">
               Frequently Asked Questions
             </h1>
             <p className="text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed max-w-2xl">
@@ -187,8 +187,8 @@ export default function FaqPage({
                 }}
                 className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
                   selectedCategory === cat.id
-                    ? "bg-[#1E4334] text-white shadow-sm"
-                    : "bg-white text-[#1A1814]/80 border border-[#1E4334]/15 hover:bg-[#1E4334]/5"
+                    ? "bg-[#1B382B] text-white shadow-sm"
+                    : "bg-white text-[#1F1914]/80 border border-[#1B382B]/15 hover:bg-[#1B382B]/5"
                 }`}
               >
                 {cat.label}
@@ -197,7 +197,7 @@ export default function FaqPage({
           </div>
 
           {/* Accordion Questions List */}
-          <div className="rounded-[32px] bg-white border border-[#1E4334]/10 p-6 sm:p-10 shadow-sm divide-y divide-[#1A1814]/10">
+          <div className="rounded-[32px] bg-white border border-[#1B382B]/10 p-6 sm:p-10 shadow-sm divide-y divide-[#1B382B]/10">
             {filteredFaqs.map((faq, idx) => {
               const isOpen = openIndex === idx;
               return (
@@ -207,17 +207,17 @@ export default function FaqPage({
                     className="w-full flex items-start justify-between gap-6 focus:outline-none group text-left"
                   >
                     <div className="flex items-start gap-5">
-                      <span className="font-serif font-light text-xl sm:text-2xl text-[#1E4334] shrink-0 mt-0.5">
+                      <span className="font-serif font-light text-xl sm:text-2xl text-[#D97706] shrink-0 mt-0.5">
                         {faq.num}
                       </span>
-                      <h2 className="font-serif text-lg sm:text-xl text-[#1A1814] group-hover:text-[#1E4334] font-normal transition-colors leading-snug">
+                      <h2 className="font-serif text-lg sm:text-xl text-[#1F1914] group-hover:text-[#1B382B] font-normal transition-colors leading-snug">
                         {faq.q}
                       </h2>
                     </div>
 
                     <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border border-[#1A1814]/15 transition-all ${
-                        isOpen ? "bg-[#1E4334] text-white" : "bg-[#F7F5F0] text-[#1A1814]"
+                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border border-[#1B382B]/15 transition-all ${
+                        isOpen ? "bg-[#1B382B] text-white" : "bg-[#FAF7F2] text-[#1F1914]"
                       }`}
                     >
                       {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -235,7 +235,7 @@ export default function FaqPage({
           </div>
 
           {/* Bottom Assistance Card */}
-          <div className="mt-12 p-8 rounded-[32px] bg-[#1E4334] text-[#F7F5F0] flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
+          <div className="mt-12 p-8 rounded-[32px] bg-[#1B382B] text-[#FAF7F2] flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
             <div>
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-1">
                 Have a specific question about your loved one?
@@ -246,7 +246,7 @@ export default function FaqPage({
             </div>
             <a
               href="mailto:support@smritisetu.in"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#C8F028] text-[#1A1814] font-semibold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#E58A18] text-[#1F1914] font-semibold text-xs uppercase tracking-wider hover:bg-[#F59E0B] transition-all shadow-md shrink-0 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Contact Care Advisors</span>
@@ -257,10 +257,10 @@ export default function FaqPage({
       </main>
 
       {/* Simple Clean Footer */}
-      <footer className="w-full bg-[#142F24] text-[#F7F5F0] py-8 border-t border-white/10">
+      <footer className="w-full bg-[#12241C] text-[#FAF7F2] py-8 border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <p>© {new Date().getFullYear()} SmritiSetu (স্মৃতি সেতু). Dedicated to elder dignity across Northeast India.</p>
-          <button onClick={onNavigateHome} className="text-[#C8F028] hover:underline font-medium">
+          <button onClick={onNavigateHome} className="text-[#F59E0B] hover:underline font-medium cursor-pointer">
             ← Return to Home Page
           </button>
         </div>

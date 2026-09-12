@@ -15,7 +15,6 @@ import {
   Sparkles,
   WifiOff,
   ShieldCheck,
-  Heart,
 } from "lucide-react";
 
 interface RoleModalProps {

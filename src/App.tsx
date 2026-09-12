@@ -115,7 +115,7 @@ export default function App() {
 
   // Main Landing Page (Zero Fake Claims, No Inlined FAQs)
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans selection:bg-[#1E4334] selection:text-[#C8F028]">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1F1914] font-sans selection:bg-[#1B382B] selection:text-[#F59E0B]">
       <Preloader onComplete={() => setIsSiteLoaded(true)} />
       {/* 1. Sticky Navigation Bar */}
       <Header

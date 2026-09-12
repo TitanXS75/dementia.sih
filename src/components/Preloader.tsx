@@ -48,7 +48,7 @@ export default function Preloader({
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#FBF9F4] overflow-hidden px-6 transition-all duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#FAF7F2] overflow-hidden px-6 transition-all duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
         isFadingOut
           ? "-translate-y-full opacity-0 pointer-events-none"
           : "translate-y-0 opacity-100"
@@ -65,13 +65,13 @@ export default function Preloader({
       `}</style>
 
       {/* Brand Title - Solid, calm, elegant, NO blinking */}
-      <div className="text-[#1E4334] font-serif font-light tracking-[0.25em] sm:tracking-[0.45em] md:tracking-[0.7em] text-3xl sm:text-5xl md:text-6xl text-center select-none opacity-100">
+      <div className="text-[#1B382B] font-serif font-light tracking-[0.25em] sm:tracking-[0.45em] md:tracking-[0.7em] text-3xl sm:text-5xl md:text-6xl text-center select-none opacity-100">
         {brandName}
       </div>
 
-      {/* Minimalist 1px Track with Slow Steady Gliding Line */}
-      <div className="mt-8 w-40 sm:w-56 h-px bg-[#1E4334]/15 overflow-hidden relative">
-        <div className="absolute top-0 left-0 h-full w-1/3 bg-[#1E4334] animate-preloader-bar" />
+      {/* Minimalist 1px Track with Slow Steady Gliding Golden Line */}
+      <div className="mt-8 w-40 sm:w-56 h-px bg-[#1B382B]/15 overflow-hidden relative">
+        <div className="absolute top-0 left-0 h-full w-1/3 bg-[#E58A18] animate-preloader-bar" />
       </div>
     </div>
   );

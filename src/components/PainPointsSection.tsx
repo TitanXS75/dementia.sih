@@ -29,7 +29,7 @@ export default function PainPointsSection() {
   ];
 
   return (
-    <section id="problems" className="w-full bg-[#1E4334] text-[#F7F5F0] py-10 sm:py-14 lg:py-16 overflow-hidden relative">
+    <section id="problems" className="w-full bg-[#1B382B] text-[#FAF7F2] py-10 sm:py-14 lg:py-16 overflow-hidden relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
@@ -42,9 +42,9 @@ export default function PainPointsSection() {
                   alt="Elderly Indian grandfather portrait"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E4334]/90 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1B382B]/95 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 text-left">
-                  <span className="px-3 py-1 rounded-none bg-[#C8F028] text-[#1A1814] text-xs font-semibold uppercase tracking-wider">
+                  <span className="px-3 py-1 rounded-none bg-[#E58A18] text-[#1F1914] text-xs font-semibold uppercase tracking-wider">
                     The Silent Reality
                   </span>
                   <p className="font-serif text-base sm:text-lg lg:text-xl text-white font-normal mt-2 leading-snug">
@@ -57,7 +57,7 @@ export default function PainPointsSection() {
 
           {/* Right Problems List - Compact 2-column Grid fitting in 1 view */}
           <div className="lg:col-span-7 flex flex-col text-left justify-center">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-2">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#F59E0B] mb-2">
               The Reality
             </div>
             
@@ -72,7 +72,7 @@ export default function PainPointsSection() {
                   key={idx}
                   className="p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors flex items-start gap-3.5 text-left"
                 >
-                  <span className="font-serif font-light text-xl sm:text-2xl text-[#C8F028] shrink-0 leading-none mt-0.5">
+                  <span className="font-serif font-light text-xl sm:text-2xl text-[#F59E0B] shrink-0 leading-none mt-0.5">
                     {item.num}
                   </span>
                   <p className="text-xs sm:text-sm font-normal text-white/90 leading-snug font-sans">

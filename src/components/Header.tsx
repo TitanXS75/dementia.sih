@@ -29,13 +29,13 @@ export default function Header({
   const activeLangObj = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#F7F5F0]/95 backdrop-blur-md border-b border-[#1E4334]/10 transition-all">
+    <header className="sticky top-0 z-50 w-full bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#1B382B]/10 transition-all">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-6">
         
         {/* Brand Logo - Just SmritiSetu */}
         <a href="#" className="flex items-center focus:outline-none shrink-0 group">
-          <span className="font-serif text-2xl font-bold tracking-tight text-[#1E4334] group-hover:text-[#142F24] transition-colors leading-none">
-            SmritiSetu
+          <span className="font-serif text-2xl font-bold tracking-tight text-[#1B382B] group-hover:text-[#12241C] transition-colors leading-none">
+            SmritiSetu<span className="text-[#E58A18]">.</span>
           </span>
         </a>
 
@@ -43,31 +43,31 @@ export default function Header({
         <nav className="hidden lg:flex items-center gap-1.5">
           <a
             href="#problems"
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             The Reality
           </a>
           <a
             href="#solutions"
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             Ecosystem
           </a>
           <a
             href="#how-it-works"
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             How It Works
           </a>
           <a
             href="#comparison"
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             Comparison
           </a>
           <a
             href="#surfaces"
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             Surfaces
           </a>
@@ -75,7 +75,7 @@ export default function Header({
             onClick={() => {
               if (onNavigateFaq) onNavigateFaq();
             }}
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1F1914]/75 hover:text-[#1B382B] hover:bg-[#1B382B]/5 transition-all"
           >
             FAQs
           </button>
@@ -87,15 +87,15 @@ export default function Header({
           <div className="relative">
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-xs font-medium text-[#1A1814] border border-[#1E4334]/15 hover:bg-[#F7F5F0] transition-all focus:outline-none shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-xs font-medium text-[#1F1914] border border-[#1B382B]/15 hover:bg-[#FAF7F2] transition-all focus:outline-none shadow-xs"
             >
-              <Globe className="w-3.5 h-3.5 text-[#1E4334]" />
+              <Globe className="w-3.5 h-3.5 text-[#1B382B]" />
               <span>{activeLangObj.native}</span>
               <ChevronDown className="w-3 h-3 text-on-surface-variant" />
             </button>
 
             {langDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-[#1E4334]/15 p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-[#1B382B]/15 p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-3 py-1.5 text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
                   Select Language
                 </div>
@@ -108,8 +108,8 @@ export default function Header({
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-left transition-colors ${
                       currentLang === lang.code
-                        ? "bg-[#1E4334] text-white font-medium"
-                        : "text-[#1A1814] hover:bg-[#F7F5F0]"
+                        ? "bg-[#1B382B] text-white font-medium"
+                        : "text-[#1F1914] hover:bg-[#FAF7F2]"
                     }`}
                   >
                     <span>{lang.label}</span>
@@ -123,7 +123,7 @@ export default function Header({
           {/* Clean Pill Button */}
           <button
             onClick={() => onOpenRoleModal()}
-            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
+            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#1B382B] text-white hover:bg-[#12241C] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
           >
             Explore Platform
           </button>
@@ -131,7 +131,7 @@ export default function Header({
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-full text-[#1A1814] hover:bg-white border border-[#1E4334]/15 focus:outline-none"
+            className="lg:hidden p-2.5 rounded-full text-[#1F1914] hover:bg-white border border-[#1B382B]/15 focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -142,8 +142,8 @@ export default function Header({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#F7F5F0] border-t border-[#1E4334]/10 px-6 py-4 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
-          <nav className="flex flex-col gap-2 text-sm font-medium text-[#1A1814]">
+        <div className="lg:hidden bg-[#FAF7F2] border-t border-[#1B382B]/10 px-6 py-4 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
+          <nav className="flex flex-col gap-2 text-sm font-medium text-[#1F1914]">
             <a href="#problems" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-white text-left">
               The Reality
             </a>
@@ -168,13 +168,13 @@ export default function Header({
             >
               FAQs
             </button>
-            <div className="pt-2 border-t border-[#1E4334]/10 mt-2">
+            <div className="pt-2 border-t border-[#1B382B]/10 mt-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenRoleModal();
                 }}
-                className="w-full py-3 rounded-full bg-[#1E4334] text-white font-semibold text-xs tracking-wide shadow-sm text-center"
+                className="w-full py-3 rounded-full bg-[#1B382B] text-white font-semibold text-xs tracking-wide shadow-sm text-center"
               >
                 Explore Platform
               </button>
