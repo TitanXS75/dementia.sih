@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Check, X, Sparkles } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 export default function ComparisonSection() {
   const [activeTab, setActiveTab] = useState<"rational" | "emotional">("rational");
@@ -9,7 +9,7 @@ export default function ComparisonSection() {
       feature: "Northeast India Regional Dialects",
       generic: "English only (Western)",
       hospital: "Standard Hindi or English",
-      smriti: "Assamese, Bengali, Bodo, Manipuri, Hindi + more",
+      smriti: "Assamese, Bengali, Punjabi, Hindi + more",
     },
     {
       feature: "Ergonomics for Trembling Hands",
@@ -101,21 +101,20 @@ export default function ComparisonSection() {
         {/* Comparison Table */}
         <div className="rounded-[36px] bg-white border border-[#1E4334]/10 overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse font-sans">
+            <table className="w-full text-center border-collapse font-sans">
               <thead>
                 <tr className="border-b border-[#1E4334]/10 bg-[#F7F5F0]/80">
-                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70">
+                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70 text-center">
                     What matters
                   </th>
-                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70">
+                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70 text-center">
                     Generic Brain Games
                   </th>
-                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70">
+                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1A1814]/70 text-center">
                     Hospital Paper Logs
                   </th>
-                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1E4334] bg-[#FEF3C7] border-l-2 border-[#D97706]">
-                    <span className="flex items-center gap-1.5 font-bold">
-                      <Sparkles className="w-4 h-4 text-[#D97706]" />
+                  <th className="p-6 text-xs font-semibold uppercase tracking-wider text-[#1E4334] bg-[#FEF3C7] border-l-2 border-[#D97706] text-center">
+                    <span className="font-bold">
                       SmritiSetu Platform
                     </span>
                   </th>
@@ -124,23 +123,23 @@ export default function ComparisonSection() {
               <tbody className="divide-y divide-[#1E4334]/10 text-sm sm:text-base font-normal">
                 {currentList.map((row, idx) => (
                   <tr key={idx} className="hover:bg-[#F7F5F0]/60 transition-colors">
-                    <td className="p-6 font-medium text-[#1A1814] max-w-xs">
+                    <td className="p-6 font-medium text-[#1A1814] max-w-xs text-center">
                       {row.feature}
                     </td>
-                    <td className="p-6 text-[#1A1814]/75">
-                      <div className="flex items-center gap-2">
+                    <td className="p-6 text-[#1A1814]/75 text-center">
+                      <div className="flex items-center justify-center gap-2">
                         <X className="w-4 h-4 text-red-500 shrink-0" />
                         <span>{row.generic}</span>
                       </div>
                     </td>
-                    <td className="p-6 text-[#1A1814]/70">
-                      <div className="flex items-center gap-2">
+                    <td className="p-6 text-[#1A1814]/70 text-center">
+                      <div className="flex items-center justify-center gap-2">
                         <X className="w-4 h-4 text-amber-600 shrink-0" />
                         <span>{row.hospital}</span>
                       </div>
                     </td>
-                    <td className="p-6 font-bold text-[#1E4334] bg-[#FEF3C7]/40 border-l-2 border-[#D97706]">
-                      <div className="flex items-center gap-2">
+                    <td className="p-6 font-bold text-[#1E4334] bg-[#FEF3C7]/40 border-l-2 border-[#D97706] text-center">
+                      <div className="flex items-center justify-center gap-2">
                         <Check className="w-5 h-5 text-[#1E4334] font-black shrink-0" />
                         <span>{row.smriti}</span>
                       </div>

@@ -77,7 +77,7 @@ export default function Header({
           {/* Clean Pill Button */}
           <button
             onClick={() => onOpenRoleModal()}
-            className="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-full bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
+            className="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-xl bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
           >
             Explore Platform
           </button>

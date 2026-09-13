@@ -216,7 +216,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                 {/* Launch CTA */}
                 <button
                   onClick={() => onOpenRoleModal("patient")}
-                  className="w-full py-3.5 rounded-full bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                  className="w-full py-3.5 rounded-xl bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
                 >
                   <span>Launch Elder Bedside Mode</span>
                 </button>

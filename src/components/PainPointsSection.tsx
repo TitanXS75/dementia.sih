@@ -35,8 +35,8 @@ export default function PainPointsSection() {
           
           {/* Left Visual with Authentic Indian Elder Photograph Frame */}
           <div className="lg:col-span-5 relative">
-            <div className="rounded-none overflow-hidden border border-white/20 p-2 bg-white/5 shadow-2xl relative">
-              <div className="relative h-[260px] sm:h-[320px] lg:h-[370px] rounded-none overflow-hidden">
+            <div className="rounded-3xl overflow-hidden border border-white/20 p-2.5 bg-white/5 shadow-2xl relative">
+              <div className="relative h-[260px] sm:h-[320px] lg:h-[370px] rounded-2xl overflow-hidden">
                 <img
                   src="/images/grandfather_documentary.png"
                   alt="Elderly Indian grandfather portrait"
@@ -44,7 +44,7 @@ export default function PainPointsSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1E4334]/95 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 text-left">
-                  <span className="px-3 py-1 rounded-none bg-[#C8F028] text-[#1A1814] text-xs font-semibold uppercase tracking-wider">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#C8F028] text-[#1A1814] text-xs font-semibold uppercase tracking-wider">
                     The Silent Reality
                   </span>
                   <p className="font-serif text-base sm:text-lg lg:text-xl text-white font-normal mt-2 leading-snug">

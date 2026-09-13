@@ -48,11 +48,10 @@ export default function Preloader({
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#F7F5F0] overflow-hidden px-6 transition-all duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
-        isFadingOut
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#F7F5F0] overflow-hidden px-6 transition-all duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${isFadingOut
           ? "-translate-y-full opacity-0 pointer-events-none"
           : "translate-y-0 opacity-100"
-      }`}
+        }`}
     >
       <style>{`
         @keyframes preloader-bar {
@@ -69,9 +68,9 @@ export default function Preloader({
         {brandName}
       </div>
 
-      {/* Minimalist 1px Track with Slow Steady Gliding Golden Line */}
+      {/* Minimalist 1px Track with Slow Steady Gliding Dark Orange Line */}
       <div className="mt-8 w-40 sm:w-56 h-px bg-[#1E4334]/15 overflow-hidden relative">
-        <div className="absolute top-0 left-0 h-full w-1/3 bg-[#C8F028] animate-preloader-bar" />
+        <div className="absolute top-0 left-0 h-full w-1/3 bg-[#EA580C] animate-preloader-bar" />
       </div>
     </div>
   );

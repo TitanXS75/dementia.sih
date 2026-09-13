@@ -84,7 +84,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
           {/* Quick Platform Launch Button */}
           <button
             onClick={onOpenRoleModal}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#1E4334] hover:bg-[#FEF3C7] hover:text-[#92400E] font-semibold text-sm transition-all shadow-xl active:scale-95 cursor-pointer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white text-[#1E4334] hover:bg-[#FEF3C7] hover:text-[#92400E] font-semibold text-sm transition-all shadow-xl active:scale-95 cursor-pointer"
           >
             <span>Explore All 3 Surfaces Live</span>
           </button>

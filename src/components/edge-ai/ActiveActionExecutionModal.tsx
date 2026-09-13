@@ -125,16 +125,24 @@ export default function ActiveActionExecutionModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142F24]/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div
+      data-lenis-prevent="true"
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142F24]/80 backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div 
-        className="w-full max-w-3xl bg-[#F7F5F0] border-2 border-[#1E4334] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
-        role="dialog"
-        aria-modal="true"
+        data-lenis-prevent="true"
+        className="w-full max-w-3xl bg-[#F7F5F0] border-2 border-[#1E4334] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] overscroll-contain"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
       >
         {/* Header with Clean Status Badge */}
         <div className="px-6 py-4 bg-[#1E4334] text-white flex items-center justify-between border-b border-[#142F24]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-none bg-[#C8F028] text-[#1E4334] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-[#C8F028] text-[#1E4334] flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -142,7 +150,7 @@ export default function ActiveActionExecutionModal({
                 <span className="text-xs uppercase tracking-widest text-[#C8F028] font-bold">
                   On-Device Action Executed
                 </span>
-                <span className="px-2 py-0.5 text-[10px] bg-white/10 text-white font-mono border border-white/20">
+                <span className="px-2.5 py-0.5 text-[10px] bg-white/10 text-white font-mono border border-white/20 rounded-full">
                   {telemetry.latencyMs}ms
                 </span>
               </div>
@@ -179,11 +187,11 @@ export default function ActiveActionExecutionModal({
         </div>
 
         {/* Modal Dynamic Body */}
-        <div className="p-6 md:p-8 overflow-y-auto flex-1 space-y-6">
+        <div data-lenis-prevent="true" className="p-6 md:p-8 overflow-y-auto flex-1 space-y-6 overscroll-contain">
           {/* 1. MUSIC ACTION */}
           {tool === "play_nostalgia_audio" && (
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-[#1E4334]/20 space-y-4">
+              <div className="p-6 bg-white border border-[#1E4334]/20 rounded-2xl space-y-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-[#1E4334] font-semibold">
@@ -199,7 +207,7 @@ export default function ActiveActionExecutionModal({
 
                   <button
                     onClick={toggleAudio}
-                    className="p-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] transition-colors shrink-0"
+                    className="p-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] transition-colors shrink-0 rounded-full"
                     aria-label={isPlayingAudio ? "Pause vintage track" : "Play vintage track"}
                   >
                     {isPlayingAudio ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
@@ -208,11 +216,11 @@ export default function ActiveActionExecutionModal({
 
                 {/* Animated Frequency Bars */}
                 <div className="pt-4 border-t border-[#1E4334]/10">
-                  <div className="flex items-end justify-between h-14 gap-1 px-2 bg-[#F7F5F0] border border-[#1E4334]/15 p-2">
+                  <div className="flex items-end justify-between h-14 gap-1 px-2 bg-[#F7F5F0] border border-[#1E4334]/15 p-2 rounded-xl">
                     {[40, 70, 45, 90, 60, 80, 50, 95, 65, 85, 40, 75, 90, 60, 85, 45, 70, 55, 90, 60].map((h, i) => (
                       <div
                         key={i}
-                        className={`flex-1 bg-[#1E4334] transition-all duration-300 ${
+                        className={`flex-1 bg-[#1E4334] transition-all duration-300 rounded-full ${
                           isPlayingAudio ? "animate-pulse" : "opacity-40"
                         }`}
                         style={{ height: isPlayingAudio ? `${h}%` : "15%" }}
@@ -226,7 +234,7 @@ export default function ActiveActionExecutionModal({
                 </div>
               </div>
 
-              <div className="p-4 bg-[#C8F028]/15 border border-[#1E4334]/20 flex items-center gap-3">
+              <div className="p-4 bg-[#C8F028]/15 border border-[#1E4334]/20 rounded-xl flex items-center gap-3">
                 <CheckCircle2 className="w-5 h-5 text-[#1E4334] shrink-0" />
                 <p className="text-xs text-[#1E4334] font-medium leading-relaxed">
                   <strong>Clinical Reminiscence Note:</strong> Familiar songs trigger preserved episodic memory in the medial prefrontal cortex even during late-stage Alzheimer's.
@@ -238,7 +246,7 @@ export default function ActiveActionExecutionModal({
           {/* 2. FAMILY JIGSAW ACTION */}
           {tool === "open_family_jigsaw" && (
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-[#1E4334]/20 space-y-4">
+              <div className="p-6 bg-white border border-[#1E4334]/20 rounded-2xl space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-[#1E4334] font-semibold">
@@ -248,20 +256,20 @@ export default function ActiveActionExecutionModal({
                       {parameters.subject}
                     </h3>
                   </div>
-                  <span className="px-3 py-1 text-xs bg-[#F7F5F0] border border-[#1E4334]/20 text-[#1E4334] font-mono">
+                  <span className="px-3 py-1 text-xs bg-[#F7F5F0] border border-[#1E4334]/20 text-[#1E4334] font-mono rounded-full">
                     {puzzlePiecesPlaced.length} / 4 Placed
                   </span>
                 </div>
 
                 {/* 4-Piece Tactile Grid */}
-                <div className="grid grid-cols-2 gap-2 max-w-sm mx-auto aspect-square p-2 bg-[#F7F5F0] border-2 border-dashed border-[#1E4334]/30">
+                <div className="grid grid-cols-2 gap-2 max-w-sm mx-auto aspect-square p-2.5 bg-[#F7F5F0] border-2 border-dashed border-[#1E4334]/30 rounded-2xl">
                   {[0, 1, 2, 3].map((idx) => {
                     const isPlaced = puzzlePiecesPlaced.includes(idx);
                     return (
                       <button
                         key={idx}
                         onClick={() => handleTogglePiece(idx)}
-                        className={`aspect-square flex flex-col items-center justify-center p-4 border transition-all text-center ${
+                        className={`aspect-square flex flex-col items-center justify-center p-4 border rounded-xl transition-all text-center ${
                           isPlaced
                             ? "bg-[#1E4334] text-white border-[#142F24] shadow-inner"
                             : "bg-white hover:bg-[#C8F028]/20 text-[#1E4334] border-[#1E4334]/30 border-dashed"
@@ -293,10 +301,10 @@ export default function ActiveActionExecutionModal({
           {/* 3. CALM SUNDOWNING PROTOCOL */}
           {tool === "trigger_calm_protocol" && (
             <div className="space-y-6">
-              <div className="p-6 bg-[#142F24] text-white border border-[#C8F028]/30 space-y-5">
+              <div className="p-6 bg-[#142F24] text-white border border-[#C8F028]/30 rounded-2xl space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 bg-[#C8F028] animate-ping" />
+                    <span className="w-3 h-3 bg-[#C8F028] animate-ping rounded-full" />
                     <span className="text-xs font-mono uppercase tracking-widest text-[#C8F028] font-bold">
                       Calm Protocol Engaged · Sundowning Protection
                     </span>
@@ -304,7 +312,7 @@ export default function ActiveActionExecutionModal({
                   <span className="text-xs font-mono text-white/70">Ambient Wash: Amber</span>
                 </div>
 
-                <div className="p-4 bg-white/5 border border-white/10 space-y-2">
+                <div className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-2">
                   <div className="flex items-center gap-3">
                     <Volume2 className="w-5 h-5 text-[#C8F028] shrink-0" />
                     <div>
@@ -319,8 +327,8 @@ export default function ActiveActionExecutionModal({
                 </div>
 
                 {/* Gentle 4-7-8 Breathing Pacer */}
-                <div className="text-center py-4 bg-white/5 border border-white/10">
-                  <div className="w-20 h-20 mx-auto rounded-none border-2 border-[#C8F028] flex items-center justify-center animate-pulse">
+                <div className="text-center py-4 bg-white/5 border border-white/10 rounded-xl">
+                  <div className="w-20 h-20 mx-auto rounded-full border-2 border-[#C8F028] flex items-center justify-center animate-pulse">
                     <span className="text-xs font-mono text-[#C8F028]">Breathe In</span>
                   </div>
                   <p className="text-xs text-white/75 mt-3">
@@ -334,7 +342,7 @@ export default function ActiveActionExecutionModal({
           {/* 4. ASHA CLINICAL TRIAGE */}
           {tool === "log_asha_screening" && (
             <div className="space-y-6">
-              <div className="p-6 bg-white border border-[#1E4334]/20 space-y-4">
+              <div className="p-6 bg-white border border-[#1E4334]/20 rounded-2xl space-y-4">
                 <div className="flex items-center justify-between border-b border-[#1E4334]/10 pb-3">
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-[#1E4334] font-semibold">
@@ -344,25 +352,25 @@ export default function ActiveActionExecutionModal({
                       MMSE Cognitive Telemetry Card
                     </h3>
                   </div>
-                  <span className="px-3 py-1 text-xs bg-[#1E4334] text-[#C8F028] font-mono">
+                  <span className="px-3 py-1 text-xs bg-[#1E4334] text-[#C8F028] font-mono rounded-full">
                     Ready for PDF Export
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15">
+                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
                     <span className="text-[#1A1814]/60 block mb-1">Vocal Recall Latency</span>
                     <strong className="text-sm text-[#1E4334]">
                       {parameters.vocalRecallLatencySeconds} Seconds
                     </strong>
                   </div>
-                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15">
+                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
                     <span className="text-[#1A1814]/60 block mb-1">Motor Tremor Check</span>
                     <strong className="text-sm text-[#1E4334]">
                       {parameters.motorTremorDetected ? "Positive (Right Index)" : "None Detected"}
                     </strong>
                   </div>
-                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 sm:col-span-2">
+                  <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl sm:col-span-2">
                     <span className="text-[#1A1814]/60 block mb-1">Clinical Staging Band</span>
                     <strong className="text-sm text-[#1E4334] block">
                       {parameters.mmseCognitiveBand}
@@ -373,7 +381,7 @@ export default function ActiveActionExecutionModal({
                 <div className="pt-2 flex justify-end">
                   <button 
                     onClick={() => alert("Bilingual Clinical PDF generated and saved to offline storage.")}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#1E4334] text-white hover:bg-[#142F24] text-xs font-semibold"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1E4334] text-white hover:bg-[#142F24] text-xs font-semibold rounded-full"
                   >
                     <Download className="w-4 h-4 text-[#C8F028]" />
                     Export Physician-Ready PDF
@@ -385,8 +393,8 @@ export default function ActiveActionExecutionModal({
 
           {/* 5. GENTLE REASSURANCE FALLBACK */}
           {tool === "gentle_reassurance_fallback" && (
-            <div className="p-6 bg-white border border-[#1E4334]/20 space-y-4 text-center">
-              <div className="w-12 h-12 mx-auto bg-[#F7F5F0] border border-[#1E4334]/20 flex items-center justify-center text-[#1E4334]">
+            <div className="p-6 bg-white border border-[#1E4334]/20 rounded-2xl space-y-4 text-center">
+              <div className="w-12 h-12 mx-auto bg-[#F7F5F0] border border-[#1E4334]/20 rounded-full flex items-center justify-center text-[#1E4334]">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-serif font-bold text-[#1E4334]">
@@ -402,11 +410,11 @@ export default function ActiveActionExecutionModal({
           )}
 
           {/* Parameter Inspection Accordion (for Evaluators/Judges) */}
-          <div className="p-4 bg-[#F7F5F0] border border-[#1E4334]/15 text-xs">
+          <div className="p-4 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-2xl text-xs">
             <span className="font-mono font-bold text-[#1E4334] uppercase tracking-wider block mb-2">
               Structured JSON Schema Output (Zero Cloud):
             </span>
-            <pre className="p-3 bg-white border border-[#1E4334]/10 font-mono text-[11px] text-[#1A1814] overflow-x-auto">
+            <pre className="p-3 bg-white border border-[#1E4334]/10 font-mono text-[11px] text-[#1A1814] overflow-x-auto rounded-xl">
               {JSON.stringify(
                 {
                   tool,
@@ -428,7 +436,7 @@ export default function ActiveActionExecutionModal({
           </span>
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-[#1E4334] hover:bg-[#142F24] text-white text-xs font-semibold transition-colors"
+            className="px-6 py-2 bg-[#1E4334] hover:bg-[#142F24] text-white text-xs font-semibold transition-colors rounded-full"
           >
             Done
           </button>

@@ -51,22 +51,22 @@ export default function HowItWorks() {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="rounded-none bg-white border border-[#1E4334]/15 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-[#1E4334]/40 transition-all duration-300 flex flex-col justify-between text-left"
+              className="rounded-2xl bg-white border border-[#1E4334]/15 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-[#1E4334]/40 transition-all duration-300 flex flex-col justify-between text-left"
             >
               <div>
                 {/* Step Thumbnail */}
-                <div className="relative h-36 rounded-none overflow-hidden bg-stone-100 mb-4 border border-[#1E4334]/10">
+                <div className="relative h-36 rounded-xl overflow-hidden bg-stone-100 mb-4 border border-[#1E4334]/10">
                   <img
                     src={step.img}
                     alt={step.title}
-                    className="w-full h-full object-cover rounded-none"
+                    className="w-full h-full object-cover rounded-xl"
                   />
-                  <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-none bg-[#1E4334] text-white text-[11px] font-serif font-medium shadow-xs">
+                  <div className="absolute top-2.5 left-2.5 px-3 py-1 rounded-full bg-[#1E4334] text-white text-[11px] font-serif font-medium shadow-xs">
                     Step {step.num}
                   </div>
                 </div>
 
-                <span className="text-[11px] font-semibold text-[#1E4334] px-2.5 py-0.5 rounded-none bg-[#1E4334]/8 border border-[#1E4334]/15 inline-block mb-2">
+                <span className="text-[11px] font-semibold text-[#1E4334] px-3 py-1 rounded-full bg-[#1E4334]/8 border border-[#1E4334]/15 inline-block mb-2">
                   {step.tag}
                 </span>
 

@@ -33,6 +33,7 @@ export default function App() {
       wheelMultiplier: 1,
       touchMultiplier: 1.2,
     });
+    (window as any).__lenis = lenis;
 
     let animId: number;
     function raf(time: number) {
@@ -44,6 +45,7 @@ export default function App() {
     return () => {
       cancelAnimationFrame(animId);
       lenis.destroy();
+      (window as any).__lenis = null;
     };
   }, []);
 
@@ -52,6 +54,21 @@ export default function App() {
   const [initialRole, setInitialRole] = useState("patient");
   const [isEdgeConsoleOpen, setIsEdgeConsoleOpen] = useState(false);
   const [activeExecutionResult, setActiveExecutionResult] = useState<ToolExecutionResult | null>(null);
+
+  // Freeze background page scroll completely whenever any modal is open
+  const isAnyModalOpen = isRoleModalOpen || isEdgeConsoleOpen || Boolean(activeExecutionResult);
+  useEffect(() => {
+    const lenis = (window as any).__lenis;
+    if (isAnyModalOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      if (lenis) lenis.stop();
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      if (lenis) lenis.start();
+    }
+  }, [isAnyModalOpen]);
 
   const [currentView, setCurrentView] = useState<"home" | "faq">(() => {
     return window.location.hash === "#faq" ? "faq" : "home";

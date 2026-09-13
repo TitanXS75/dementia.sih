@@ -30,12 +30,20 @@ export default function RoleModal({ isOpen, onClose, initialRole = "patient" }: 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-primary/40 backdrop-blur-md animate-in fade-in duration-200"
+      data-lenis-prevent="true"
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-primary/40 backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
       onClick={onClose}
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] bg-surface rounded-[32px] sm:rounded-[40px] shadow-[0_32px_70px_-16px_rgba(4,45,31,0.35)] border border-surface-container-high/90 overflow-hidden flex flex-col animate-in zoom-in-95 duration-200"
+        data-lenis-prevent="true"
+        className="relative w-full max-w-4xl max-h-[92vh] bg-surface rounded-[32px] sm:rounded-[40px] shadow-[0_32px_70px_-16px_rgba(4,45,31,0.35)] border border-surface-container-high/90 overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 overscroll-contain"
         onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
         <div className="p-6 sm:p-8 bg-surface-container-lowest border-b border-surface-container-high/60 flex items-start justify-between gap-4">
@@ -105,7 +113,7 @@ export default function RoleModal({ isOpen, onClose, initialRole = "patient" }: 
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6">
+        <div data-lenis-prevent="true" className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6 overscroll-contain">
           {/* TAB 1: PATIENT VOICE PWA */}
           {activeTab === "patient" && (
             <div className="space-y-6 animate-in fade-in duration-200">
@@ -344,7 +352,7 @@ export default function RoleModal({ isOpen, onClose, initialRole = "patient" }: 
 
           <button
             onClick={onClose}
-            className="w-full sm:w-auto px-7 py-2.5 rounded-full bg-primary text-on-primary font-semibold text-xs sm:text-sm hover:bg-primary-container active:scale-[0.98] transition-all shadow-md"
+            className="w-full sm:w-auto px-7 py-2.5 rounded-xl bg-primary text-on-primary font-semibold text-xs sm:text-sm hover:bg-primary-container active:scale-[0.98] transition-all shadow-md cursor-pointer"
           >
             Close Preview
           </button>

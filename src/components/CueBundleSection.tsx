@@ -105,7 +105,7 @@ export default function CueBundleSection({ onOpenRoleModal }: CueBundleSectionPr
           </div>
           <button
             onClick={() => onOpenRoleModal()}
-            className="px-8 py-3.5 rounded-full bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md shrink-0 cursor-pointer"
+            className="px-8 py-3.5 rounded-xl bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md shrink-0 cursor-pointer"
           >
             Launch Interactive Tour
           </button>

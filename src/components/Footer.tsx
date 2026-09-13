@@ -12,7 +12,7 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         {/* Footer Navigation Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pb-12 border-b border-white/10 text-left">
           
           {/* Col 1: Our Product */}
           <div>
@@ -58,38 +58,9 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
             <ul className="space-y-2.5 text-sm font-normal text-white/75 font-sans">
               <li>অসমীয়া (Assamese)</li>
               <li>বাংলা (Bengali)</li>
-              <li>बड़ो (Bodo)</li>
-              <li>ꯃꯤꯇꯩꯂꯣꯟ (Manipuri)</li>
+              <li>ਪੰਜਾਬੀ (Punjabi)</li>
               <li>हिंदी (Hindi)</li>
-            </ul>
-          </div>
-
-          {/* Col 3: Legal */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#C8F028] mb-4">
-              Legal
-            </h4>
-            <ul className="space-y-2.5 text-sm font-normal text-white/75 font-sans">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Terms of Care
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Data Security &amp; Encryption
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Clinical Disclaimer
-                </a>
-              </li>
+              <li>मराठी (Marathi)</li>
             </ul>
           </div>
 
@@ -100,19 +71,31 @@ export default function Footer({ onOpenRoleModal, onScrollTo, onNavigateFaq }: F
             </h4>
             <ul className="space-y-2.5 text-sm font-medium text-white/75">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="hover:text-white transition-colors text-left cursor-pointer"
+                >
                   Community Healthcare Forum
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="hover:text-white transition-colors text-left cursor-pointer"
+                >
                   Geriatric Research Alliance
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="hover:text-white transition-colors text-left cursor-pointer"
+                >
                   Care Support Helpline
-                </a>
+                </button>
               </li>
             </ul>
           </div>

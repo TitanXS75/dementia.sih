@@ -17,19 +17,13 @@ declare global {
 }
 
 export const SUPPORTED_LANGUAGES: LanguageOption[] = [
-  { code: 'en', country: 'IN', name: 'English', nativeName: 'English' },
-  { code: 'hi', country: 'IN', name: 'Hindi', nativeName: 'हिन्दी' },
-  { code: 'as', country: 'IN', name: 'Assamese', nativeName: 'অসমীয়া' },
+  { code: 'hi', country: 'IN', name: 'Hindi', nativeName: 'हिंदी' },
   { code: 'bn', country: 'IN', name: 'Bengali', nativeName: 'বাংলা' },
-  { code: 'te', country: 'IN', name: 'Telugu', nativeName: 'తెలుగు' },
-  { code: 'mr', country: 'IN', name: 'Marathi', nativeName: 'मराठी' },
-  { code: 'ta', country: 'IN', name: 'Tamil', nativeName: 'தமிழ்' },
-  { code: 'gu', country: 'IN', name: 'Gujarati', nativeName: 'ગુજરાતી' },
-  { code: 'kn', country: 'IN', name: 'Kannada', nativeName: 'ಕನ್ನಡ' },
-  { code: 'ml', country: 'IN', name: 'Malayalam', nativeName: 'മലയാളം' },
   { code: 'pa', country: 'IN', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ' },
-  { code: 'or', country: 'IN', name: 'Odia', nativeName: 'ଓଡ଼ିଆ' },
-  { code: 'ur', country: 'IN', name: 'Urdu', nativeName: 'اردو' },
+  { code: 'as', country: 'IN', name: 'Assamese', nativeName: 'অসমীয়া' },
+  { code: 'mr', country: 'IN', name: 'Marathi', nativeName: 'मराठी' },
+  { code: 'gu', country: 'IN', name: 'Gujarati', nativeName: 'ગુજરાતી' },
+  { code: 'en', country: 'IN', name: 'English', nativeName: 'English' },
 ];
 
 interface GoogleTranslateProps {
@@ -57,6 +51,8 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
       const originalHtmlOverflow = document.documentElement.style.overflow;
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
+      const lenis = (window as any).__lenis;
+      if (lenis) lenis.stop();
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
@@ -68,6 +64,8 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
         document.body.style.overflow = originalBodyOverflow;
         document.documentElement.style.overflow = originalHtmlOverflow;
         window.removeEventListener('keydown', handleKeyDown);
+        const lenis = (window as any).__lenis;
+        if (lenis) lenis.start();
       };
     }
   }, [isModalOpen]);
@@ -117,7 +115,13 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
       } else {
         for (let i = 0; i < combo.options.length; i++) {
           const val = combo.options[i].value;
-          if (val.toLowerCase() === selected.toLowerCase()) {
+          const s = selected.toLowerCase();
+          const v = val.toLowerCase();
+          if (
+            v === s ||
+            v.startsWith(s + '-') ||
+            s.startsWith(v + '-')
+          ) {
             targetIndex = i;
             targetVal = val;
             break;
@@ -266,7 +270,7 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
       <button
         type="button"
         onClick={openModal}
-        className={`notranslate inline-flex items-center justify-center gap-2 h-10 px-4 rounded-full bg-white text-xs font-semibold text-[#1E4334] border border-[#1E4334]/20 hover:bg-[#F7F5F0] hover:border-[#1E4334]/35 transition-all focus:outline-none shadow-xs cursor-pointer active:scale-95 tracking-wide ${className}`}
+        className={`notranslate inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-white text-xs font-semibold text-[#1E4334] border border-[#1E4334]/20 hover:bg-[#F7F5F0] hover:border-[#1E4334]/35 transition-all focus:outline-none shadow-xs cursor-pointer active:scale-95 tracking-wide ${className}`}
         translate="no"
         title={`Language: ${currentLangObj.name} (${currentLangObj.nativeName || currentLangObj.name})`}
         aria-label="Select Language"
@@ -291,7 +295,7 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
         >
           <div
             data-lenis-prevent="true"
-            className="notranslate relative bg-[#FAF7F2] rounded-2xl shadow-[0_25px_60px_-15px_rgba(18,36,28,0.5)] w-full max-w-4xl lg:max-w-5xl border border-[#1E4334]/20 overflow-hidden flex flex-col my-auto animate-in zoom-in-95 duration-150"
+            className="notranslate relative bg-[#FAF7F2] rounded-2xl shadow-[0_25px_60px_-15px_rgba(18,36,28,0.5)] w-full max-w-2xl sm:max-w-3xl border border-[#1E4334]/20 overflow-hidden flex flex-col my-auto animate-in zoom-in-95 duration-150"
             translate="no"
             onClick={(e) => e.stopPropagation()}
             onWheel={(e) => e.stopPropagation()}
@@ -299,17 +303,11 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
             {/* Modal Header */}
             <div className="notranslate flex justify-between items-start px-6 py-4 border-b border-[#1E4334]/10 bg-white shrink-0" translate="no">
               <div className="notranslate" translate="no">
-                <div className="flex items-center gap-2 mb-0.5 notranslate" translate="no">
-                  <span className="w-2 h-2 rounded-full bg-[#D97706] notranslate"></span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#1E4334] notranslate" translate="no">
-                    Bhasha / Language Selection
-                  </span>
-                </div>
                 <h2 className="notranslate font-serif text-2xl font-bold text-[#1E4334] leading-tight" translate="no">
                   Select Language
                 </h2>
                 <p className="notranslate text-xs text-[#1F1914]/70 mt-0.5" translate="no">
-                  Choose your regional dialect for real-time translation across all surfaces
+                  Choose your regional language for real-time translation across all surfaces
                 </p>
               </div>
               <button
@@ -323,9 +321,9 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
               </button>
             </div>
 
-            {/* Modal Language Grid - Horizontally wide 4-column layout that eliminates scrolling */}
+            {/* Modal Language Grid */}
             <div data-lenis-prevent="true" className="notranslate p-5 overflow-y-auto max-h-[calc(85vh-140px)]" translate="no">
-              <div className="notranslate grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5" translate="no">
+              <div className="notranslate grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" translate="no">
                 {SUPPORTED_LANGUAGES.map((lang) => {
                   const isSelected = tempSelectedLang === lang.code;
                   return (
@@ -333,16 +331,16 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
                       key={lang.code}
                       type="button"
                       onClick={() => setTempSelectedLang(lang.code)}
-                      className={`notranslate flex items-center justify-between px-3 py-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      className={`notranslate flex items-center justify-between p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                         isSelected
                           ? 'border-2 border-[#1E4334] bg-white shadow-sm ring-1 ring-[#1E4334]/20'
                           : 'border-[#1E4334]/12 bg-white/75 hover:bg-white hover:border-[#1E4334]/30'
                       }`}
                       translate="no"
                     >
-                      <div className="notranslate flex items-center gap-2.5 min-w-0" translate="no">
+                      <div className="notranslate flex items-center gap-3 min-w-0" translate="no">
                         <span
-                          className={`notranslate text-[11px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
+                          className={`notranslate text-[11px] font-bold px-2 py-1 rounded-md shrink-0 uppercase tracking-wide ${
                             isSelected
                               ? 'bg-[#1E4334] text-white'
                               : 'bg-[#1E4334]/8 text-[#1E4334]'
@@ -353,23 +351,21 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
                         </span>
                         <div className="notranslate flex flex-col min-w-0" translate="no">
                           <span
-                            className={`notranslate text-xs font-semibold truncate ${
+                            className={`notranslate text-sm font-semibold truncate ${
                               isSelected ? 'text-[#1E4334] font-bold' : 'text-[#1F1914]'
+                            }`}
+                            translate="no"
+                          >
+                            {lang.nativeName}
+                          </span>
+                          <span
+                            className={`notranslate text-xs truncate ${
+                              isSelected ? 'text-[#D97706] font-medium' : 'text-[#1F1914]/60'
                             }`}
                             translate="no"
                           >
                             {lang.name}
                           </span>
-                          {lang.nativeName && (
-                            <span
-                              className={`notranslate text-[11px] truncate ${
-                                isSelected ? 'text-[#D97706] font-medium' : 'text-[#1F1914]/60'
-                              }`}
-                              translate="no"
-                            >
-                              {lang.nativeName}
-                            </span>
-                          )}
                         </div>
                       </div>
 

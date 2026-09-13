@@ -116,12 +116,19 @@ html.lenis, html.lenis body {
   scroll-behavior: auto !important;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+.lenis.lenis-smooth [data-lenis-prevent],
+[data-lenis-prevent="true"],
+[role="dialog"] {
+  overscroll-behavior: contain !important;
+}
+
+html:has([role="dialog"]),
+body:has([role="dialog"]) {
+  overflow: hidden !important;
 }
 
 .lenis.lenis-stopped {
-  overflow: clip;
+  overflow: clip !important;
 }
 
 .lenis.lenis-smooth iframe {

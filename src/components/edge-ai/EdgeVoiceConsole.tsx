@@ -43,6 +43,8 @@ export default function EdgeVoiceConsole({
   const audioChunksRef = useRef<Blob[]>([]);
   const audioContextRef = useRef<AudioContext | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const statusTextRef = useRef<HTMLSpanElement | null>(null);
 
   // Whisper language parameter mapping
   const whisperLangMap: Record<SupportedLang, string> = {
@@ -79,7 +81,13 @@ export default function EdgeVoiceConsole({
       audioChunksRef.current = [];
       setTranscribeProgress(null);
 
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+      });
       mediaStreamRef.current = stream;
 
       // Audio level analyser
@@ -87,18 +95,91 @@ export default function EdgeVoiceConsole({
       audioContextRef.current = audioCtx;
       const source = audioCtx.createMediaStreamSource(stream);
       const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 64;
+      analyser.fftSize = 128;
+      analyser.smoothingTimeConstant = 0.6;
       source.connect(analyser);
 
       const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      let idleTick = 0;
+
       const updateLevel = () => {
         if (!mediaStreamRef.current) return;
         analyser.getByteFrequencyData(dataArray);
+
         let sum = 0;
+        let peak = 0;
         for (let i = 0; i < dataArray.length; i++) {
           sum += dataArray[i];
+          if (dataArray[i] > peak) peak = dataArray[i];
         }
-        setAudioLevel(sum / dataArray.length);
+        const avg = sum / dataArray.length;
+        const isSpeaking = avg > 8 || peak > 28;
+        idleTick += 0.08;
+
+        // Render live Canvas bars
+        const canvas = canvasRef.current;
+        if (canvas) {
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            const width = canvas.width;
+            const height = canvas.height;
+            ctx.clearRect(0, 0, width, height);
+
+            const numBars = 22;
+            const barWidth = 5;
+            const totalBarW = numBars * barWidth;
+            const gap = (width - totalBarW) / (numBars - 1);
+
+            for (let i = 0; i < numBars; i++) {
+              // Human speech frequency map (bins 1 to 32)
+              const bin = Math.min(dataArray.length - 1, Math.floor(1 + (i / numBars) * 30));
+              const val = dataArray[bin] || 0;
+
+              let barHeight = 0;
+              if (isSpeaking) {
+                barHeight = Math.max(5, Math.min(height, (val / 255) * height * 1.45));
+              } else {
+                // Subtle organic idle breathing ripple so the user sees mic is listening
+                const ripple = Math.sin(idleTick + i * 0.45) * 3 + 5;
+                barHeight = Math.max(3, ripple);
+              }
+
+              const x = i * (barWidth + gap);
+              const y = height - barHeight;
+
+              const grad = ctx.createLinearGradient(0, height, 0, y);
+              if (isSpeaking) {
+                grad.addColorStop(0, "#C8F028");
+                grad.addColorStop(0.6, "#E58A18");
+                grad.addColorStop(1, "#F97316");
+              } else {
+                grad.addColorStop(0, "rgba(200, 240, 40, 0.4)");
+                grad.addColorStop(1, "rgba(200, 240, 40, 0.7)");
+              }
+
+              ctx.fillStyle = grad;
+              ctx.beginPath();
+              if (typeof ctx.roundRect === "function") {
+                ctx.roundRect(x, y, barWidth, barHeight, 2.5);
+              } else {
+                ctx.rect(x, y, barWidth, barHeight);
+              }
+              ctx.fill();
+            }
+          }
+        }
+
+        // Direct DOM update for status text - zero lag
+        if (statusTextRef.current) {
+          if (isSpeaking) {
+            statusTextRef.current.innerText = "Voice Detected (Listening)";
+            statusTextRef.current.className = "text-xs font-mono text-[#C8F028] font-bold";
+          } else {
+            statusTextRef.current.innerText = "Listening... Speak now";
+            statusTextRef.current.className = "text-xs font-mono text-white/80 font-normal";
+          }
+        }
+
         animFrameRef.current = requestAnimationFrame(updateLevel);
       };
       updateLevel();
@@ -221,16 +302,24 @@ export default function EdgeVoiceConsole({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142F24]/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div
+      data-lenis-prevent="true"
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142F24]/80 backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div 
-        className="w-full max-w-2xl bg-[#F7F5F0] border-2 border-[#1E4334] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
-        role="dialog"
-        aria-modal="true"
+        data-lenis-prevent="true"
+        className="w-full max-w-2xl bg-[#F7F5F0] border-2 border-[#1E4334] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] overscroll-contain"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="px-6 py-4 bg-[#1E4334] text-white flex items-center justify-between border-b border-[#142F24]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-none bg-[#C8F028] text-[#142F24] flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-xl bg-[#C8F028] text-[#142F24] flex items-center justify-center font-bold">
               <Mic className="w-4 h-4" />
             </div>
             <div>
@@ -238,7 +327,7 @@ export default function EdgeVoiceConsole({
                 <span className="text-[10px] uppercase tracking-widest text-[#C8F028] font-bold">
                   Voice & Clinical Assistant
                 </span>
-                <span className="flex items-center gap-1 text-[10px] text-white/80 bg-white/10 px-2 py-0.5 border border-white/20">
+                <span className="flex items-center gap-1 text-[10px] text-white/80 bg-white/10 px-2.5 py-0.5 border border-white/20 rounded-full">
                   <WifiOff className="w-3 h-3 text-[#C8F028]" /> Local Whisper Active
                 </span>
               </div>
@@ -272,7 +361,7 @@ export default function EdgeVoiceConsole({
         </div>
 
         {/* Language Tabs */}
-        <div className="p-6 overflow-y-auto flex-1 space-y-5">
+        <div data-lenis-prevent="true" className="p-6 overflow-y-auto flex-1 space-y-5 overscroll-contain">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-mono uppercase tracking-wider text-[#1E4334] font-semibold flex items-center gap-1.5">
@@ -293,7 +382,7 @@ export default function EdgeVoiceConsole({
                 <button
                   key={lang.code}
                   onClick={() => setSelectedLang(lang.code)}
-                  className={`py-2 px-2 text-center text-xs font-serif font-semibold border transition-all ${
+                  className={`py-2 px-2 text-center text-xs font-serif font-semibold border rounded-xl transition-all ${
                     selectedLang === lang.code
                       ? "bg-[#1E4334] text-white border-[#1E4334] shadow-xs"
                       : "bg-white text-[#1A1814] border-[#1E4334]/20 hover:bg-[#C8F028]/15"
@@ -327,25 +416,35 @@ export default function EdgeVoiceConsole({
 
             {/* Live Audio Visualizer when Recording */}
             {isRecording && (
-              <div className="p-3 bg-[#1E4334] text-white flex items-center justify-between gap-3 border border-[#C8F028]/40">
-                <div className="flex items-center gap-2">
-                  <Volume2 className="w-4 h-4 text-[#C8F028] animate-bounce" />
-                  <span className="text-xs font-mono">Listening to Microphone</span>
+              <div className="p-3.5 bg-[#142F24] text-white flex items-center justify-between gap-4 border border-[#C8F028]/40 rounded-xl shadow-inner">
+                <div className="flex items-center gap-2.5 min-w-[170px] shrink-0">
+                  <div className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  </div>
+                  {/* Speaker icon - STEADY, no jumping */}
+                  <Volume2 className="w-4 h-4 text-[#C8F028] shrink-0" />
+                  <span
+                    ref={statusTextRef}
+                    className="text-xs font-mono text-white/80 transition-colors"
+                  >
+                    Listening... Speak now
+                  </span>
                 </div>
-                <div className="flex items-end gap-1 h-5 flex-1 max-w-xs justify-center">
-                  {[25, 60, 85, 45, 95, 70, 90, 35, 75, 95, 50, 70].map((val, idx) => (
-                    <div
-                      key={idx}
-                      className="w-1.5 bg-[#C8F028] transition-all duration-75"
-                      style={{
-                        height: `${Math.max(20, (audioLevel / 128) * val)}%`,
-                      }}
-                    />
-                  ))}
+
+                {/* Highly Interactive 60fps Real-Time Canvas Bargraph */}
+                <div className="flex-1 flex justify-center items-center px-2">
+                  <canvas
+                    ref={canvasRef}
+                    width={220}
+                    height={36}
+                    className="w-[220px] h-[36px] max-w-full"
+                  />
                 </div>
+
                 <button
                   onClick={stopRecording}
-                  className="px-3 py-1 bg-[#C8F028] text-[#142F24] text-xs font-semibold font-mono"
+                  className="px-4 py-1.5 bg-[#C8F028] hover:bg-[#b8e020] text-[#142F24] text-xs font-bold font-mono rounded-full shrink-0 transition-all shadow-sm active:scale-95 cursor-pointer"
                 >
                   Done
                 </button>
@@ -367,14 +466,14 @@ export default function EdgeVoiceConsole({
                     ? "जैसे: 'बाबाजी को बहुत घबराहट हो रही है, शांत करो'..."
                     : "e.g., 'Play vintage Bhupen Hazarika song' or 'ASHA: 20s recall delay'..."
                 }
-                className="w-full pl-4 pr-24 py-3.5 bg-white border border-[#1E4334]/30 rounded-none text-sm text-[#1A1814] focus:outline-none focus:border-[#1E4334] focus:ring-1 focus:ring-[#1E4334]"
+                className="w-full pl-4 pr-24 py-3.5 bg-white border border-[#1E4334]/30 rounded-xl text-sm text-[#1A1814] focus:outline-none focus:border-[#1E4334] focus:ring-1 focus:ring-[#1E4334]"
               />
 
               <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
                 <button
                   onClick={toggleRecording}
                   disabled={isTranscribing}
-                  className={`p-2 border transition-all ${
+                  className={`p-2 border rounded-lg transition-all ${
                     isRecording
                       ? "bg-red-600 text-white border-red-700 animate-pulse shadow-md"
                       : "bg-[#F7F5F0] hover:bg-[#C8F028]/20 text-[#1E4334] border-[#1E4334]/20"
@@ -388,7 +487,7 @@ export default function EdgeVoiceConsole({
                 <button
                   onClick={() => handleDispatch()}
                   disabled={!inputText.trim() || isProcessing || isTranscribing}
-                  className="p-2 bg-[#1E4334] hover:bg-[#142F24] disabled:opacity-40 text-white border border-[#1E4334] transition-colors"
+                  className="p-2 bg-[#1E4334] hover:bg-[#142F24] disabled:opacity-40 text-white border border-[#1E4334] rounded-lg transition-colors"
                   title="Dispatch intent"
                   aria-label="Dispatch query"
                 >
@@ -398,7 +497,7 @@ export default function EdgeVoiceConsole({
             </div>
 
             {transcribeProgress && (
-              <p className="text-xs text-[#1E4334] bg-[#C8F028]/20 p-2 border border-[#C8F028]/30 flex items-center gap-1.5 font-mono">
+              <p className="text-xs text-[#1E4334] bg-[#C8F028]/20 p-2.5 border border-[#C8F028]/30 rounded-xl flex items-center gap-1.5 font-mono">
                 <Sparkles className="w-3.5 h-3.5 text-[#C8F028] shrink-0" />
                 {transcribeProgress}
               </p>
@@ -416,7 +515,7 @@ export default function EdgeVoiceConsole({
                 <button
                   key={sample.id}
                   onClick={() => handleSelectSample(sample)}
-                  className="w-full text-left p-3 bg-white hover:bg-[#F7F5F0] border border-[#1E4334]/20 transition-all group flex items-start justify-between gap-4"
+                  className="w-full text-left p-3.5 bg-white hover:bg-[#F7F5F0] border border-[#1E4334]/20 rounded-xl transition-all group flex items-start justify-between gap-4"
                 >
                   <div>
                     <p className="text-xs font-serif font-bold text-[#1E4334] group-hover:text-[#142F24]">
@@ -426,7 +525,7 @@ export default function EdgeVoiceConsole({
                       {sample.explanation}
                     </p>
                   </div>
-                  <span className="shrink-0 px-2 py-1 text-[10px] font-mono bg-[#1E4334]/5 text-[#1E4334] border border-[#1E4334]/15">
+                  <span className="shrink-0 px-2.5 py-1 text-[10px] font-mono bg-[#1E4334]/5 text-[#1E4334] border border-[#1E4334]/15 rounded-full">
                     → {sample.expectedTool}
                   </span>
                 </button>
@@ -442,7 +541,7 @@ export default function EdgeVoiceConsole({
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-white border border-[#1E4334]/20 hover:bg-[#1E4334] hover:text-white transition-colors font-medium text-xs"
+            className="px-5 py-2 bg-white border border-[#1E4334]/20 hover:bg-[#1E4334] hover:text-white transition-colors font-medium text-xs rounded-full"
           >
             Close
           </button>

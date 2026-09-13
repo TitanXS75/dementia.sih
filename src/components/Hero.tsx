@@ -101,14 +101,14 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
             }`}>
               <button
                 onClick={() => onScrollTo("how-it-works")}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-none bg-[#1E4334] text-[#F7F5F0] hover:bg-[#142F24] font-semibold text-sm sm:text-base transition-all shadow-xl active:scale-95 cursor-pointer border border-[#1E4334]"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#1E4334] text-[#F7F5F0] hover:bg-[#142F24] font-semibold text-sm sm:text-base transition-all shadow-xl active:scale-95 cursor-pointer border border-[#1E4334]"
               >
                 <span>See How It Works</span>
               </button>
 
               <button
                 onClick={() => onOpenRoleModal(activeRole)}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-none bg-white text-[#1A1814] hover:bg-[#F7F5F0] font-semibold text-sm sm:text-base border-2 border-[#1A1814]/15 transition-all shadow-sm cursor-pointer"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white text-[#1A1814] hover:bg-[#F7F5F0] font-semibold text-sm sm:text-base border-2 border-[#1A1814]/15 transition-all shadow-sm cursor-pointer"
               >
                 Explore Surface Apps
               </button>
@@ -119,14 +119,14 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
           <div className={`lg:col-span-6 w-full transition-all duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             animate ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-[0.98]"
           }`}>
-            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-none flex flex-col h-[440px]">
+            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col h-[440px]">
               
               {/* 2 Role Navigation Tabs */}
               <div className="grid grid-cols-2 border-b-2 border-[#1E4334] bg-[#F7F5F0] shrink-0">
                 <button
                   type="button"
                   onClick={() => setActiveRole("patient")}
-                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer rounded-none border-r border-[#1E4334]/20 ${
+                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border-r border-[#1E4334]/20 ${
                     activeRole === "patient"
                       ? "bg-[#1E4334] text-[#C8F028]"
                       : "text-[#1A1814] hover:bg-black/5"
@@ -139,7 +139,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                 <button
                   type="button"
                   onClick={() => setActiveRole("asha")}
-                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer rounded-none ${
+                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer ${
                     activeRole === "asha"
                       ? "bg-[#1E4334] text-[#C8F028]"
                       : "text-[#1A1814] hover:bg-black/5"
@@ -175,20 +175,17 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                             Live daylight orientation clock for the bedside
                           </p>
                         </div>
-                        <span className="text-[10px] font-bold text-[#92400E] bg-[#FEF3C7] px-2.5 py-0.5 border border-[#D97706]/30 uppercase tracking-wider">
-                          Living Room
-                        </span>
                       </div>
 
                       {/* 2 Big Simple Buttons */}
                       <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15">
+                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
                           <Radio className="w-5 h-5 text-[#1E4334] mb-2" />
                           <h4 className="text-sm font-semibold text-[#1A1814]">Nostalgia Radio</h4>
                           <p className="text-xs text-on-surface-variant mt-0.5">Classic Assamese songs</p>
                         </div>
 
-                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15">
+                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
                           <ImageIcon className="w-5 h-5 text-[#1E4334] mb-2" />
                           <h4 className="text-sm font-semibold text-[#1A1814]">Family Photos</h4>
                           <p className="text-xs text-on-surface-variant mt-0.5">Familiar faces &amp; memories</p>
@@ -196,7 +193,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                       </div>
 
                       {/* Simple Calm Telemetry */}
-                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15">
+                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15 rounded-xl">
                         <ShieldCheck className="w-4 h-4 text-[#1E4334] shrink-0" />
                         <span>Sundowning status: <strong>Peaceful &amp; Calm (98%)</strong></span>
                       </div>
@@ -205,7 +202,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("patient")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
                     >
                       <span>Launch Bedside Surface</span>
                     </button>
@@ -226,14 +223,14 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                             Door-to-door cognitive screening for rural Northeast
                           </p>
                         </div>
-                        <span className="text-[10px] font-bold text-[#92400E] bg-[#FEF3C7] px-2.5 py-0.5 border border-[#D97706]/30 uppercase tracking-wider">
+                        <span className="text-[10px] font-bold text-[#92400E] bg-[#FEF3C7] px-2.5 py-0.5 border border-[#D97706]/30 uppercase tracking-wider rounded-full">
                           100% Offline
                         </span>
                       </div>
 
                       {/* 2 Stat Cards */}
                       <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center">
+                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
                           <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
                             Speech &amp; Motor Test
                           </div>
@@ -241,7 +238,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                           <div className="text-[10px] text-[#1E4334]">Stable baseline</div>
                         </div>
 
-                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center">
+                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
                           <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
                             Cultural Cue Recall
                           </div>
@@ -251,7 +248,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                       </div>
 
                       {/* Report summary */}
-                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15">
+                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15 rounded-xl">
                         <FileCheck2 className="w-4 h-4 text-[#1E4334] shrink-0" />
                         <span>Bilingual clinical summary ready for doctor review</span>
                       </div>
@@ -260,7 +257,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("asha")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-none active:scale-[0.99]"
+                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
                     >
                       <span>Preview Clinical Triage Tool</span>
                     </button>
