@@ -11,6 +11,7 @@ import CtaSection from "./components/CtaSection";
 import Footer from "./components/Footer";
 import RoleModal from "./components/RoleModal";
 import FaqPage from "./components/FaqPage";
+import AuthPage from "./components/AuthPage";
 import Preloader from "./components/Preloader";
 import Lenis from "lenis";
 import ScrollReveal from "./components/ScrollReveal";
@@ -70,16 +71,26 @@ export default function App() {
     }
   }, [isAnyModalOpen]);
 
-  const [currentView, setCurrentView] = useState<"home" | "faq">(() => {
-    return window.location.hash === "#faq" ? "faq" : "home";
+  const [currentView, setCurrentView] = useState<"home" | "faq" | "login" | "signup">(() => {
+    if (window.location.hash === "#faq") return "faq";
+    if (window.location.hash === "#login") return "login";
+    if (window.location.hash === "#signup") return "signup";
+    return "home";
   });
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === "#faq") {
+      const hash = window.location.hash;
+      if (hash === "#faq") {
         setCurrentView("faq");
         window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (currentView === "faq") {
+      } else if (hash === "#login") {
+        setCurrentView("login");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (hash === "#signup") {
+        setCurrentView("signup");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (["faq", "login", "signup"].includes(currentView)) {
         setCurrentView("home");
       }
     };
@@ -119,6 +130,18 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateToLogin = () => {
+    setCurrentView("login");
+    window.location.hash = "#login";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const navigateToSignup = () => {
+    setCurrentView("signup");
+    window.location.hash = "#signup";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   // Dedicated Separate FAQ Page View
   if (currentView === "faq") {
     return (
@@ -138,6 +161,16 @@ export default function App() {
     );
   }
 
+  // Auth Page (Login & Signup combined)
+  if (currentView === "login" || currentView === "signup") {
+    return (
+      <AuthPage
+        initialMode={currentView}
+        onNavigateHome={navigateToHome}
+      />
+    );
+  }
+
   // Main Landing Page (Zero Fake Claims, No Inlined FAQs)
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans selection:bg-[#1E4334] selection:text-[#C8F028]">
@@ -149,6 +182,8 @@ export default function App() {
         onSelectLang={setCurrentLang}
         onOpenRoleModal={handleOpenRoleModal}
         onNavigateFaq={navigateToFaq}
+        onNavigateLogin={navigateToLogin}
+        onNavigateSignup={navigateToSignup}
       />
 
       <main className="flex-1 w-full">

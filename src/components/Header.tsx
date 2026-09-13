@@ -7,12 +7,16 @@ interface HeaderProps {
   currentLang?: string;
   onSelectLang?: (lang: string) => void;
   onNavigateFaq?: () => void;
+  onNavigateLogin?: () => void;
+  onNavigateSignup?: () => void;
 }
 
 export default function Header({
   onOpenRoleModal,
   onSelectLang,
   onNavigateFaq,
+  onNavigateLogin,
+  onNavigateSignup,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -74,6 +78,16 @@ export default function Header({
           {/* Functional Real-Time Language Switcher */}
           <GoogleTranslate onLanguageChange={onSelectLang} />
 
+          {/* Sign In text link */}
+          {onNavigateLogin && (
+            <button
+              onClick={() => onNavigateLogin()}
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-full text-[#1E4334] hover:bg-[#1E4334]/8 font-semibold text-xs tracking-wide transition-all focus:outline-none"
+            >
+              Sign in
+            </button>
+          )}
+
           {/* Clean Pill Button */}
           <button
             onClick={() => onOpenRoleModal()}
@@ -127,6 +141,17 @@ export default function Header({
                 <span className="text-xs font-semibold text-[#1E4334]">Language / भाषा</span>
                 <GoogleTranslate onLanguageChange={onSelectLang} />
               </div>
+              {onNavigateLogin && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onNavigateLogin();
+                  }}
+                  className="w-full py-3 rounded-full border border-[#1E4334] text-[#1E4334] font-semibold text-xs tracking-wide text-center hover:bg-[#1E4334]/5 transition-all"
+                >
+                  Sign in
+                </button>
+              )}
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
