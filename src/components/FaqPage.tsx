@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import { ArrowLeft, Plus, Minus, Globe, ChevronDown, MessageCircle, ShieldCheck } from "lucide-react";
-import { LANGUAGES } from "./Header";
+import { ArrowLeft, Plus, Minus, MessageCircle, ShieldCheck } from "lucide-react";
+import GoogleTranslate from "./GoogleTranslate";
 
 interface FaqPageProps {
   onNavigateHome: () => void;
   onOpenRoleModal: (role?: string) => void;
-  currentLang: string;
-  onSelectLang: (lang: string) => void;
+  currentLang?: string;
+  onSelectLang?: (lang: string) => void;
 }
 
 export default function FaqPage({
   onNavigateHome,
   onOpenRoleModal,
-  currentLang,
   onSelectLang,
 }: FaqPageProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-
-  const activeLangObj = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
 
   const categories = [
     { id: "all", label: "All Questions" },
@@ -111,42 +107,8 @@ export default function FaqPage({
 
           {/* Right Controls */}
           <div className="flex items-center gap-3">
-            {/* Language Switcher */}
-            <div className="relative">
-              <button
-                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-xs font-medium text-[#1A1814] border border-[#1E4334]/15 hover:bg-[#F7F5F0] transition-all shadow-xs"
-              >
-                <Globe className="w-3.5 h-3.5 text-[#1E4334]" />
-                <span>{activeLangObj.native}</span>
-                <ChevronDown className="w-3 h-3 text-on-surface-variant" />
-              </button>
-
-              {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-[#1E4334]/15 p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
-                    Select Language
-                  </div>
-                  {LANGUAGES.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        onSelectLang(lang.code);
-                        setLangDropdownOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-left transition-colors ${
-                        currentLang === lang.code
-                          ? "bg-[#1E4334] text-white font-medium"
-                          : "text-[#1A1814] hover:bg-[#F7F5F0]"
-                      }`}
-                    >
-                      <span>{lang.label}</span>
-                      <span className="text-[11px] opacity-75">{lang.native}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Functional Real-Time Language Switcher */}
+            <GoogleTranslate onLanguageChange={onSelectLang} />
 
             {/* Platform CTA */}
             <button

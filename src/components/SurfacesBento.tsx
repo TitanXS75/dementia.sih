@@ -182,7 +182,9 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                   <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-[11px] text-white/70 font-sans">
                     <div className="flex items-center gap-2">
                       <SunMedium className="w-3.5 h-3.5 text-[#C8F028]" />
-                      <span className="font-medium text-white">সুপ্ৰভাত · {liveTime}</span>
+                      <span className="font-medium text-white">
+                        <span>সুপ্ৰভাত</span> · <span className="notranslate font-mono tabular-nums font-bold" translate="no">{liveTime}</span>
+                      </span>
                     </div>
                     <span className="text-[#C8F028] font-medium">Living Room Tablet</span>
                   </div>
