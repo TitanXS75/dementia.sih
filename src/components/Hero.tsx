@@ -163,7 +163,11 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                           <h3 className="font-serif text-lg sm:text-xl text-[#1A1814] flex items-center gap-2 flex-wrap">
                             <span>{greeting}</span>
                             <span className="text-[#1E4334]/40">·</span>
-                            <span className="font-mono text-base sm:text-lg font-bold text-[#1E4334] tracking-tight">
+                            <span
+                              className="notranslate font-mono text-base sm:text-lg font-bold text-[#1E4334] tracking-tight tabular-nums select-none"
+                              translate="no"
+                              aria-label="Live orientation clock"
+                            >
                               {currentTime}
                             </span>
                           </h3>
