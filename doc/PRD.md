@@ -73,7 +73,7 @@ SmritiSetu connects three distinct user personas into one unified data fabric:
 
 ## 5. Non-Functional Requirements
 - **Accessibility & Cognitive Ergonomics**: WCAG AAA contrast ratio compliance (minimum 7:1 for text), minimum touch target of 64px, zero nested menus, zero technical jargon.
-- **Privacy & Dignity**: 100% camera-free. Zero persistent video recording. On-device processing of biometric features.
+- **Privacy & Dignity**: Zero persistent video recording. On-device processing of biometric features.
 - **Performance**: Instant initial paint (< 1.5s on 3G network), smooth 60fps micro-animations, bundle size < 250KB gzipped.
 - **Device Compatibility**: Responsive from low-cost 8-inch Android tablets to modern desktops and smartphones.
 

@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Zero Surveillance](https://img.shields.io/badge/Privacy-100%25%20Camera--Free-C8F028?style=flat-square&colorA=1E4334)](https://github.com/TitanXS75/dimentia.sih)
+[![Privacy Focused](https://img.shields.io/badge/Privacy-Dignity%20First-C8F028?style=flat-square&colorA=1E4334)](https://github.com/TitanXS75/dimentia.sih)
 
 ---
 
@@ -42,7 +42,7 @@ SmritiSetu unifies three key care participants on a shared, dignified data bridg
    - **Living Room Daylight Orientation**: High-contrast, gentle clock displaying time of day, weather, and daily routine in native languages.
    - **Nostalgia Radio**: Curated regional vintage music that taps into deeply preserved musical memory.
    - **Affectionate Family Photo Jigsaws**: Progressive-hint tactile puzzles built from actual family photos.
-   - **Zero Surveillance Cameras**: 100% camera-free monitoring protecting personal dignity.
+   - **Dignity-First Care**: Ambient monitoring protecting personal dignity.
 
 2. **Family Caregiver Portal & WhatsApp Bridge**:
    - Daily morning familiarity digests delivered directly via WhatsApp.
@@ -79,7 +79,7 @@ Comprehensive project documentation is maintained in the [`doc/`](doc/) director
 
 - **Core**: React 18, TypeScript, Vite
 - **Styling**: Tailwind CSS (custom HSL tokens & semantic design system)
-- **Icons**: Lucide React (strictly camera-free, zero generic emojis)
+- **Icons**: Lucide React (zero generic emojis)
 - **Audio & Media**: Web Audio API, HTML5 Audio with progressive streaming
 - **AI Integrations**: Bhashini Speech API (ASR / TTS) for regional Indian dialects
 

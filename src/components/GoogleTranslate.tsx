@@ -266,13 +266,13 @@ export const GoogleTranslate: React.FC<GoogleTranslateProps> = ({
       <button
         type="button"
         onClick={openModal}
-        className={`notranslate inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-xs font-semibold text-[#1E4334] border border-[#1E4334]/15 hover:bg-[#F7F5F0] hover:border-[#1E4334]/30 transition-all focus:outline-none shadow-xs cursor-pointer active:scale-95 ${className}`}
+        className={`notranslate inline-flex items-center justify-center gap-2 h-10 px-4 rounded-full bg-white text-xs font-semibold text-[#1E4334] border border-[#1E4334]/20 hover:bg-[#F7F5F0] hover:border-[#1E4334]/35 transition-all focus:outline-none shadow-xs cursor-pointer active:scale-95 tracking-wide ${className}`}
         translate="no"
         title={`Language: ${currentLangObj.name} (${currentLangObj.nativeName || currentLangObj.name})`}
         aria-label="Select Language"
       >
-        <Globe className="w-3.5 h-3.5 text-[#1E4334] notranslate" />
-        <span className="font-bold text-[#1E4334] text-xs uppercase tracking-wider notranslate">
+        <Globe className="w-4 h-4 text-[#1E4334] shrink-0 notranslate" />
+        <span className="font-semibold text-[#1E4334] text-xs uppercase tracking-wider notranslate">
           {currentLangObj.code.toUpperCase()}
         </span>
       </button>

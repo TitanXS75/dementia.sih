@@ -23,7 +23,7 @@ export default function Header({
         {/* Brand Logo - Just SmritiSetu */}
         <a href="#" className="flex items-center focus:outline-none shrink-0 group">
           <span className="font-serif text-2xl font-bold tracking-tight text-[#1E4334] group-hover:text-[#142F24] transition-colors leading-none">
-            SmritiSetu<span className="text-[#C8F028]">.</span>
+            SmritiSetu<span className="text-orange-500">.</span>
           </span>
         </a>
 
@@ -77,7 +77,7 @@ export default function Header({
           {/* Clean Pill Button */}
           <button
             onClick={() => onOpenRoleModal()}
-            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
+            className="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-full bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
           >
             Explore Platform
           </button>
