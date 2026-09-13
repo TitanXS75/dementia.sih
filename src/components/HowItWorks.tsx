@@ -33,15 +33,15 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="w-full bg-[#FAF7F2] py-14 sm:py-20 overflow-hidden border-b border-[#1B382B]/10">
+    <section id="how-it-works" className="w-full bg-[#F7F5F0] py-14 sm:py-20 overflow-hidden border-b border-[#1E4334]/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
         <div className="text-left mb-10">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1B382B] mb-2">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1E4334] mb-2">
             The Daily Flow
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1F1914] tracking-tight font-normal leading-[1.12]">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1A1814] tracking-tight font-normal leading-[1.12]">
             How it works
           </h2>
         </div>
@@ -51,26 +51,26 @@ export default function HowItWorks() {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="rounded-[28px] bg-white border border-[#1B382B]/10 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-[#D97706]/40 transition-all duration-300 flex flex-col justify-between text-left"
+              className="rounded-none bg-white border border-[#1E4334]/15 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-[#1E4334]/40 transition-all duration-300 flex flex-col justify-between text-left"
             >
               <div>
                 {/* Step Thumbnail */}
-                <div className="relative h-36 rounded-none overflow-hidden bg-stone-100 mb-4 border border-[#1B382B]/10">
+                <div className="relative h-36 rounded-none overflow-hidden bg-stone-100 mb-4 border border-[#1E4334]/10">
                   <img
                     src={step.img}
                     alt={step.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-none"
                   />
-                  <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#1B382B] text-white text-[11px] font-serif font-medium shadow-xs">
+                  <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-none bg-[#1E4334] text-white text-[11px] font-serif font-medium shadow-xs">
                     Step {step.num}
                   </div>
                 </div>
 
-                <span className="text-[11px] font-semibold text-[#1B382B] px-2.5 py-0.5 rounded-full bg-[#1B382B]/8 border border-[#1B382B]/12 inline-block mb-2">
+                <span className="text-[11px] font-semibold text-[#1E4334] px-2.5 py-0.5 rounded-none bg-[#1E4334]/8 border border-[#1E4334]/15 inline-block mb-2">
                   {step.tag}
                 </span>
 
-                <h3 className="font-serif text-lg sm:text-xl font-normal text-[#1F1914] tracking-tight mb-2">
+                <h3 className="font-serif text-lg sm:text-xl font-normal text-[#1A1814] tracking-tight mb-2">
                   {step.title}
                 </h3>
 

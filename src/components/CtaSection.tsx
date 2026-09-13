@@ -21,7 +21,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
   };
 
   return (
-    <section className="w-full bg-[#1B382B] text-[#FAF7F2] pt-20 sm:pt-28 pb-16 overflow-hidden relative">
+    <section className="w-full bg-[#1E4334] text-[#F7F5F0] pt-20 sm:pt-28 pb-16 overflow-hidden relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
         
         {/* Monologue Banner */}
@@ -41,7 +41,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
 
           {/* Form Box */}
           <div className="w-full max-w-xl bg-white/10 backdrop-blur-md rounded-[32px] p-6 sm:p-8 border border-white/20 shadow-2xl mb-10">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#F59E0B] mb-4 text-center">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#C8F028] mb-4 text-center">
               Request Early Family Access or Clinic Pilot
             </p>
 
@@ -51,7 +51,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Full Name"
-                className="w-full px-5 py-3.5 rounded-2xl bg-[#FAF7F2]/95 text-[#1F1914] placeholder:text-[#1F1914]/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#D97706]"
+                className="w-full px-5 py-3.5 rounded-2xl bg-[#F7F5F0]/95 text-[#1A1814] placeholder:text-[#1A1814]/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#D97706]"
                 required
               />
 
@@ -61,12 +61,12 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   placeholder="Phone Number or Email"
-                  className="flex-1 px-5 py-3.5 rounded-2xl bg-[#FAF7F2]/95 text-[#1F1914] placeholder:text-[#1F1914]/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#D97706]"
+                  className="flex-1 px-5 py-3.5 rounded-2xl bg-[#F7F5F0]/95 text-[#1A1814] placeholder:text-[#1A1814]/50 text-sm focus:outline-none focus:ring-2 focus:ring-[#D97706]"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3.5 rounded-2xl bg-[#E58A18] hover:bg-[#F59E0B] text-[#1F1914] font-semibold text-sm transition-all shadow-md shrink-0 flex items-center justify-center cursor-pointer"
+                  className="px-8 py-3.5 rounded-2xl bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md shrink-0 flex items-center justify-center cursor-pointer"
                 >
                   <span>Submit</span>
                 </button>
@@ -74,7 +74,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
             </form>
 
             {submitted && (
-              <div className="mt-4 p-3 rounded-xl bg-[#FEF3C7]/20 border border-[#D97706] text-xs font-semibold text-[#F59E0B] flex items-center justify-center gap-2">
+              <div className="mt-4 p-3 rounded-xl bg-[#FEF3C7]/20 border border-[#D97706] text-xs font-semibold text-[#C8F028] flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Thank you! Our care team will reach out directly.</span>
               </div>
@@ -84,7 +84,7 @@ export default function CtaSection({ onOpenRoleModal }: CtaSectionProps) {
           {/* Quick Platform Launch Button */}
           <button
             onClick={onOpenRoleModal}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#1B382B] hover:bg-[#FEF3C7] hover:text-[#92400E] font-semibold text-sm transition-all shadow-xl active:scale-95 cursor-pointer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#1E4334] hover:bg-[#FEF3C7] hover:text-[#92400E] font-semibold text-sm transition-all shadow-xl active:scale-95 cursor-pointer"
           >
             <span>Explore All 3 Surfaces Live</span>
           </button>

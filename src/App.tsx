@@ -14,9 +14,14 @@ import FaqPage from "./components/FaqPage";
 import Preloader from "./components/Preloader";
 import Lenis from "lenis";
 import ScrollReveal from "./components/ScrollReveal";
+import EdgeVoiceConsole from "./components/edge-ai/EdgeVoiceConsole";
+import ActiveActionExecutionModal from "./components/edge-ai/ActiveActionExecutionModal";
+import { ToolExecutionResult } from "./lib/edge-ai/edgeEngine";
+import { Mic } from "lucide-react";
 
 export default function App() {
   const [isSiteLoaded, setIsSiteLoaded] = useState(false);
+
   // Lenis Butter-Smooth Inertia Scroll
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -45,6 +50,9 @@ export default function App() {
   const [currentLang, setCurrentLang] = useState<string>("en");
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
   const [initialRole, setInitialRole] = useState("patient");
+  const [isEdgeConsoleOpen, setIsEdgeConsoleOpen] = useState(false);
+  const [activeExecutionResult, setActiveExecutionResult] = useState<ToolExecutionResult | null>(null);
+
   const [currentView, setCurrentView] = useState<"home" | "faq">(() => {
     return window.location.hash === "#faq" ? "faq" : "home";
   });
@@ -115,8 +123,9 @@ export default function App() {
 
   // Main Landing Page (Zero Fake Claims, No Inlined FAQs)
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1F1914] font-sans selection:bg-[#1B382B] selection:text-[#F59E0B]">
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans selection:bg-[#1E4334] selection:text-[#C8F028]">
       <Preloader onComplete={() => setIsSiteLoaded(true)} />
+
       {/* 1. Sticky Navigation Bar */}
       <Header
         currentLang={currentLang}
@@ -126,7 +135,7 @@ export default function App() {
       />
 
       <main className="flex-1 w-full">
-        {/* 2. Hero Section: Generous top gap, clean serif headline, zero emojis */}
+        {/* 2. Hero Section */}
         <Hero
           isReady={isSiteLoaded}
           onOpenRoleModal={handleOpenRoleModal}
@@ -174,6 +183,33 @@ export default function App() {
         onOpenRoleModal={handleOpenRoleModal}
         onScrollTo={handleScrollTo}
         onNavigateFaq={navigateToFaq}
+      />
+
+      {/* Simple, compact floating voice assistant trigger */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsEdgeConsoleOpen(true)}
+          className="w-12 h-12 rounded-full bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] shadow-xl flex items-center justify-center border border-[#C8F028]/30 transition-all hover:scale-105 active:scale-95 group focus:outline-none"
+          title="Voice & Clinical Assistant (Offline)"
+          aria-label="Open Voice & Clinical Assistant"
+        >
+          <Mic className="w-5 h-5 text-[#C8F028] transition-transform group-hover:scale-110" />
+        </button>
+      </div>
+
+      {/* On-Device Edge AI Voice & Triage Console */}
+      <EdgeVoiceConsole
+        isOpen={isEdgeConsoleOpen}
+        onClose={() => setIsEdgeConsoleOpen(false)}
+        onExecuteTool={(res) => {
+          setActiveExecutionResult(res);
+        }}
+      />
+
+      {/* Active Action Execution Modal (Triggered by tool dispatch) */}
+      <ActiveActionExecutionModal
+        result={activeExecutionResult}
+        onClose={() => setActiveExecutionResult(null)}
       />
 
       {/* Interactive Surface Simulator Modal */}
