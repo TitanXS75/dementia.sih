@@ -27,16 +27,16 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
     return () => clearInterval(timer);
   }, []);
   return (
-    <section id="surfaces" className="w-full bg-[#FAF7F2] py-14 sm:py-20 overflow-hidden border-b border-[#1B382B]/10 relative">
+    <section id="surfaces" className="w-full bg-[#F7F5F0] py-14 sm:py-20 overflow-hidden border-b border-[#1E4334]/10 relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
         
         {/* Clean Header (No arrow in badge) */}
         <div className="max-w-3xl mx-auto mb-12 text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1B382B] mb-3 px-3.5 py-1 rounded-full bg-[#1B382B]/8 border border-[#1B382B]/15">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#1B382B]" />
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1E4334] mb-3 px-3.5 py-1 rounded-full bg-[#1E4334]/8 border border-[#1E4334]/15">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E4334]" />
             <span>3 Connected Modes</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1F1914] tracking-tight font-normal leading-[1.12] mb-3">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1A1814] tracking-tight font-normal leading-[1.12] mb-3">
             Family &amp; Doctor connected to the Elder
           </h2>
           <p className="text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed max-w-2xl mx-auto font-sans">
@@ -51,17 +51,17 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
           <div className="lg:col-span-5 flex flex-col gap-5 text-left">
             
             {/* Left Card 1: Family Caregiver */}
-            <div className="rounded-[24px] p-6 bg-white border border-[#1B382B]/15 shadow-sm hover:border-[#D97706]/40 hover:shadow-md transition-all duration-300 relative group">
+            <div className="rounded-[24px] p-6 bg-white border border-[#1E4334]/15 shadow-sm hover:border-[#D97706]/40 hover:shadow-md transition-all duration-300 relative group">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#1B382B]/8 text-[#1B382B] flex items-center justify-center border border-[#1B382B]/15 group-hover:scale-105 transition-transform">
-                  <Users className="w-5 h-5 text-[#1B382B]" />
+                <div className="w-10 h-10 rounded-xl bg-[#1E4334]/8 text-[#1E4334] flex items-center justify-center border border-[#1E4334]/15 group-hover:scale-105 transition-transform">
+                  <Users className="w-5 h-5 text-[#1E4334]" />
                 </div>
-                <span className="text-[11px] font-semibold text-[#1B382B] px-3 py-0.5 rounded-full bg-[#1B382B]/8 border border-[#1B382B]/12">
+                <span className="text-[11px] font-semibold text-[#1E4334] px-3 py-0.5 rounded-full bg-[#1E4334]/8 border border-[#1E4334]/12">
                   Mode 1 · Care Circle
                 </span>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl text-[#1F1914] font-normal tracking-tight mb-1.5">
+              <h3 className="font-serif text-xl sm:text-2xl text-[#1A1814] font-normal tracking-tight mb-1.5">
                 Family Caregiver
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed font-normal mb-4 font-sans">
@@ -69,37 +69,37 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
               </p>
 
               <div className="flex flex-wrap gap-2 mb-5">
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Heirloom photo cues
                 </span>
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Daily morning score
                 </span>
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Sundowning alerts
                 </span>
               </div>
 
               <button
                 onClick={() => onOpenRoleModal("caregiver")}
-                className="w-full py-2.5 rounded-xl bg-[#FAF7F2] hover:bg-[#1B382B] text-[#1B382B] hover:text-white font-semibold text-xs transition-all border border-[#1B382B]/20 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                className="w-full py-2.5 rounded-xl bg-[#F7F5F0] hover:bg-[#1E4334] text-[#1E4334] hover:text-white font-semibold text-xs transition-all border border-[#1E4334]/20 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
               >
                 <span>Preview Family Mode</span>
               </button>
             </div>
 
             {/* Left Card 2: Doctor & Frontline ASHA */}
-            <div className="rounded-[24px] p-6 bg-white border border-[#1B382B]/15 shadow-sm hover:border-[#D97706]/40 hover:shadow-md transition-all duration-300 relative group">
+            <div className="rounded-[24px] p-6 bg-white border border-[#1E4334]/15 shadow-sm hover:border-[#D97706]/40 hover:shadow-md transition-all duration-300 relative group">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#1B382B]/8 text-[#1B382B] flex items-center justify-center border border-[#1B382B]/15 group-hover:scale-105 transition-transform">
-                  <Stethoscope className="w-5 h-5 text-[#1B382B]" />
+                <div className="w-10 h-10 rounded-xl bg-[#1E4334]/8 text-[#1E4334] flex items-center justify-center border border-[#1E4334]/15 group-hover:scale-105 transition-transform">
+                  <Stethoscope className="w-5 h-5 text-[#1E4334]" />
                 </div>
-                <span className="text-[11px] font-semibold text-[#1B382B] px-3 py-0.5 rounded-full bg-[#1B382B]/8 border border-[#1B382B]/12">
+                <span className="text-[11px] font-semibold text-[#1E4334] px-3 py-0.5 rounded-full bg-[#1E4334]/8 border border-[#1E4334]/12">
                   Mode 2 · Clinical
                 </span>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl text-[#1F1914] font-normal tracking-tight mb-1.5">
+              <h3 className="font-serif text-xl sm:text-2xl text-[#1A1814] font-normal tracking-tight mb-1.5">
                 Doctor &amp; Health Worker
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed font-normal mb-4 font-sans">
@@ -107,20 +107,20 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
               </p>
 
               <div className="flex flex-wrap gap-2 mb-5">
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   100% offline screening
                 </span>
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Bilingual clinical PDF
                 </span>
-                <span className="text-[11px] font-medium text-[#1B382B] bg-[#FAF7F2] px-2.5 py-1 rounded-lg border border-[#1B382B]/10">
+                <span className="text-[11px] font-medium text-[#1E4334] bg-[#F7F5F0] px-2.5 py-1 rounded-lg border border-[#1E4334]/10">
                   Speech cadence trends
                 </span>
               </div>
 
               <button
                 onClick={() => onOpenRoleModal("asha")}
-                className="w-full py-2.5 rounded-xl bg-[#FAF7F2] hover:bg-[#1B382B] text-[#1B382B] hover:text-white font-semibold text-xs transition-all border border-[#1B382B]/20 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                className="w-full py-2.5 rounded-xl bg-[#F7F5F0] hover:bg-[#1E4334] text-[#1E4334] hover:text-white font-semibold text-xs transition-all border border-[#1E4334]/20 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
               >
                 <span>Preview Clinical Mode</span>
               </button>
@@ -134,7 +134,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
               {/* Upper curve from Card 1 to Center */}
               <path
                 d="M 0 75 C 35 75, 45 160, 60 160"
-                stroke="#1B382B"
+                stroke="#1E4334"
                 strokeWidth="2"
                 strokeDasharray="4 4"
                 className="opacity-40"
@@ -142,29 +142,29 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
               {/* Lower curve from Card 2 to Center */}
               <path
                 d="M 0 245 C 35 245, 45 160, 60 160"
-                stroke="#1B382B"
+                stroke="#1E4334"
                 strokeWidth="2"
                 strokeDasharray="4 4"
                 className="opacity-40"
               />
               {/* Convergence Node */}
-              <circle cx="60" cy="160" r="5" fill="#1B382B" />
-              <circle cx="0" cy="75" r="4" fill="#1B382B" fillOpacity="0.6" />
-              <circle cx="0" cy="245" r="4" fill="#1B382B" fillOpacity="0.6" />
+              <circle cx="60" cy="160" r="5" fill="#1E4334" />
+              <circle cx="0" cy="75" r="4" fill="#1E4334" fillOpacity="0.6" />
+              <circle cx="0" cy="245" r="4" fill="#1E4334" fillOpacity="0.6" />
             </svg>
           </div>
 
           {/* Right Column (6 cols): Featured Elder / Patient Surface */}
           <div className="lg:col-span-6 text-left">
-            <div className="rounded-[32px] p-7 sm:p-9 bg-[#1B382B] text-[#FAF7F2] border-2 border-[#1B382B] shadow-2xl relative group overflow-hidden">
+            <div className="rounded-[32px] p-7 sm:p-9 bg-[#1E4334] text-[#F7F5F0] border-2 border-[#1E4334] shadow-2xl relative group overflow-hidden">
               
               {/* Subtle Warm Ambient Glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#E58A18]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#C8F028]/15 rounded-full blur-3xl pointer-events-none" />
 
               {/* Card Header */}
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-12 h-12 rounded-2xl bg-white/15 text-[#F59E0B] flex items-center justify-center border border-white/20 group-hover:scale-105 transition-transform">
-                  <SunMedium className="w-6 h-6 text-[#F59E0B]" />
+                <div className="w-12 h-12 rounded-2xl bg-white/15 text-[#C8F028] flex items-center justify-center border border-white/20 group-hover:scale-105 transition-transform">
+                  <SunMedium className="w-6 h-6 text-[#C8F028]" />
                 </div>
               </div>
 
@@ -177,20 +177,20 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                 </p>
 
                 {/* Simulated Bedside Tablet Display */}
-                <div className="rounded-2xl bg-[#12241C] border border-white/15 p-4 mb-6 space-y-3">
+                <div className="rounded-2xl bg-[#142F24] border border-white/15 p-4 mb-6 space-y-3">
                   {/* Tablet Status Bar */}
                   <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-[11px] text-white/70 font-sans">
                     <div className="flex items-center gap-2">
-                      <SunMedium className="w-3.5 h-3.5 text-[#F59E0B]" />
+                      <SunMedium className="w-3.5 h-3.5 text-[#C8F028]" />
                       <span className="font-medium text-white">সুপ্ৰভাত · {liveTime}</span>
                     </div>
-                    <span className="text-[#F59E0B] font-medium">Living Room Tablet</span>
+                    <span className="text-[#C8F028] font-medium">Living Room Tablet</span>
                   </div>
 
                   {/* 3 Touch Elements */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                     <div className="rounded-xl bg-white/10 p-3 border border-white/10 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#E58A18]/20 text-[#F59E0B] flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#C8F028]/20 text-[#C8F028] flex items-center justify-center shrink-0">
                         <Music className="w-4 h-4" />
                       </div>
                       <div>
@@ -200,7 +200,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                     </div>
 
                     <div className="rounded-xl bg-white/10 p-3 border border-white/10 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#E58A18]/20 text-[#F59E0B] flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#C8F028]/20 text-[#C8F028] flex items-center justify-center shrink-0">
                         <ImageIcon className="w-4 h-4" />
                       </div>
                       <div>
@@ -214,7 +214,7 @@ export default function SurfacesBento({ onOpenRoleModal }: SurfacesBentoProps) {
                 {/* Launch CTA */}
                 <button
                   onClick={() => onOpenRoleModal("patient")}
-                  className="w-full py-3.5 rounded-full bg-[#E58A18] hover:bg-[#F59E0B] text-[#1F1914] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                  className="w-full py-3.5 rounded-full bg-[#C8F028] hover:bg-[#C8F028] text-[#1A1814] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
                 >
                   <span>Launch Elder Bedside Mode</span>
                 </button>

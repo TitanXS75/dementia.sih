@@ -38,18 +38,18 @@ export default function FaqSection() {
   ];
 
   return (
-    <section id="faqs" className="w-full bg-[#FAF7F2] py-20 sm:py-28 overflow-hidden border-b border-[#1B382B]/10">
+    <section id="faqs" className="w-full bg-[#F7F5F0] py-20 sm:py-28 overflow-hidden border-b border-[#1E4334]/10">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
         <div className="text-left mb-16">
-          <h2 className="font-serif text-3xl sm:text-5xl xl:text-6xl text-[#1F1914] tracking-tight font-normal leading-[1.15]">
+          <h2 className="font-serif text-3xl sm:text-5xl xl:text-6xl text-[#1A1814] tracking-tight font-normal leading-[1.15]">
             Frequently Asked Questions
           </h2>
         </div>
 
         {/* Numbered FAQ List */}
-        <div className="divide-y divide-[#1B382B]/10">
+        <div className="divide-y divide-[#1E4334]/10">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -62,13 +62,13 @@ export default function FaqSection() {
                     <span className="font-serif font-light text-2xl sm:text-3xl text-[#D97706]">
                       {faq.num}
                     </span>
-                    <h3 className="font-serif text-xl sm:text-2xl text-[#1F1914] group-hover:text-[#1B382B] font-normal transition-colors leading-snug">
+                    <h3 className="font-serif text-xl sm:text-2xl text-[#1A1814] group-hover:text-[#1E4334] font-normal transition-colors leading-snug">
                       {faq.q}
                     </h3>
                   </div>
 
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border border-[#1B382B]/15 transition-all ${
-                    isOpen ? "bg-[#1B382B] text-white" : "bg-white text-[#1F1914]"
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border border-[#1E4334]/15 transition-all ${
+                    isOpen ? "bg-[#1E4334] text-white" : "bg-white text-[#1A1814]"
                   }`}>
                     {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                   </div>

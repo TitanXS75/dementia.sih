@@ -15,8 +15,8 @@
   body {
     margin: 0;
     padding: 0;
-    background-color: #FAF7F2;
-    color: #1F1914;
+    background-color: #F7F5F0;
+    color: #1A1814;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -73,7 +73,7 @@
   letter-spacing: 0.025em;
   border: 1px solid rgba(27, 56, 43, 0.15);
   background: #EBF2EE;
-  color: #1B382B;
+  color: #1E4334;
 }
 
 .badge-pill-amber {
@@ -96,14 +96,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #F7F5F0;
 }
 ::-webkit-scrollbar-thumb {
   background: #D6CABA;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1B382B;
+  background: #1E4334;
 }
 
 
