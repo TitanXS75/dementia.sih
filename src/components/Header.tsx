@@ -78,23 +78,15 @@ export default function Header({
           {/* Functional Real-Time Language Switcher */}
           <GoogleTranslate onLanguageChange={onSelectLang} />
 
-          {/* Sign In text link */}
+          {/* Sign In Primary Pill Button */}
           {onNavigateLogin && (
             <button
               onClick={() => onNavigateLogin()}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-full text-[#1E4334] hover:bg-[#1E4334]/8 font-semibold text-xs tracking-wide transition-all focus:outline-none"
+              className="hidden sm:inline-flex items-center justify-center h-10 px-6 rounded-xl bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               Sign in
             </button>
           )}
-
-          {/* Clean Pill Button */}
-          <button
-            onClick={() => onOpenRoleModal()}
-            className="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-xl bg-[#1E4334] text-white hover:bg-[#142F24] font-semibold text-xs tracking-wide transition-all shadow-sm active:scale-95"
-          >
-            Explore Platform
-          </button>
 
           {/* Mobile hamburger */}
           <button
@@ -147,20 +139,11 @@ export default function Header({
                     setMobileMenuOpen(false);
                     onNavigateLogin();
                   }}
-                  className="w-full py-3 rounded-full border border-[#1E4334] text-[#1E4334] font-semibold text-xs tracking-wide text-center hover:bg-[#1E4334]/5 transition-all"
+                  className="w-full py-3 rounded-full bg-[#1E4334] text-white font-semibold text-xs tracking-wide shadow-sm text-center cursor-pointer"
                 >
                   Sign in
                 </button>
               )}
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenRoleModal();
-                }}
-                className="w-full py-3 rounded-full bg-[#1E4334] text-white font-semibold text-xs tracking-wide shadow-sm text-center cursor-pointer"
-              >
-                Explore Platform
-              </button>
             </div>
           </nav>
         </div>
