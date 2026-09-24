@@ -12,11 +12,12 @@ interface HeroProps {
   onOpenRoleModal: (role?: string) => void;
   onScrollTo: (id: string) => void;
   isReady?: boolean;
+  onNavigateLogin?: () => void;
 }
 
 type RoleType = "patient" | "asha";
 
-export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: HeroProps) {
+export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false, onNavigateLogin }: HeroProps) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -107,10 +108,10 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
               </button>
 
               <button
-                onClick={() => onOpenRoleModal(activeRole)}
+                onClick={() => (onNavigateLogin ? onNavigateLogin() : onScrollTo("surfaces"))}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white text-[#1A1814] hover:bg-[#F7F5F0] font-semibold text-sm sm:text-base border-2 border-[#1A1814]/15 transition-all shadow-sm cursor-pointer"
               >
-                Explore Surface Apps
+                Get Started
               </button>
             </div>
           </div>
@@ -119,90 +120,89 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
           <div className={`lg:col-span-6 w-full transition-all duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             animate ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-[0.98]"
           }`}>
-            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col h-[440px]">
+            <div className="border-2 border-[#1E4334] bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col h-auto lg:h-[450px]">
               
               {/* 2 Role Navigation Tabs */}
               <div className="grid grid-cols-2 border-b-2 border-[#1E4334] bg-[#F7F5F0] shrink-0">
                 <button
                   type="button"
                   onClick={() => setActiveRole("patient")}
-                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border-r border-[#1E4334]/20 ${
+                  className={`py-2.5 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-colors cursor-pointer border-r border-[#1E4334]/20 ${
                     activeRole === "patient"
-                      ? "bg-[#1E4334] text-[#C8F028]"
+                      ? "bg-[#1E4334] text-[#E58A18]"
                       : "text-[#1A1814] hover:bg-black/5"
                   }`}
                 >
-                  <SunMedium className="w-4 h-4 shrink-0" />
-                  <span>Elder Bedside Tablet</span>
+                  <SunMedium className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="leading-tight text-center">Elder Bedside Tablet</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setActiveRole("asha")}
-                  className={`py-4 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer ${
+                  className={`py-2.5 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-colors cursor-pointer ${
                     activeRole === "asha"
-                      ? "bg-[#1E4334] text-[#C8F028]"
+                      ? "bg-[#1E4334] text-[#E58A18]"
                       : "text-[#1A1814] hover:bg-black/5"
                   }`}
                 >
-                  <Stethoscope className="w-4 h-4 shrink-0" />
-                  <span>Doctor &amp; Frontline ASHA</span>
+                  <Stethoscope className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="leading-tight text-center">Doctor &amp; Frontline ASHA</span>
                 </button>
               </div>
 
-              {/* Constant-Height Body */}
-              <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between text-left overflow-hidden bg-white">
+              {/* Responsive Body */}
+              <div className="flex-1 p-4 sm:p-6 lg:p-7 flex flex-col justify-between text-left bg-white">
                 
                 {/* 1. ELDER TABLET MODE */}
                 {activeRole === "patient" && (
                   <>
-                    <div>
+                    <div className="space-y-3 sm:space-y-3.5">
                       {/* Clean Header */}
-                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
-                        <div>
-                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814] flex items-center gap-2 flex-wrap">
-                            <span>{greeting}</span>
-                            <span className="text-[#1E4334]/40">·</span>
-                            <span
-                              className="notranslate font-mono text-base sm:text-lg font-bold text-[#1E4334] tracking-tight tabular-nums select-none"
-                              translate="no"
-                              aria-label="Live orientation clock"
-                            >
-                              {currentTime}
-                            </span>
+                      <div className="pb-2.5 sm:pb-3 border-b border-[#1E4334]/15">
+                        <div className="flex items-baseline justify-between gap-2 flex-wrap">
+                          <h3 className="font-serif text-base sm:text-xl text-[#1A1814] font-medium">
+                            {greeting}
                           </h3>
-                          <p className="text-xs text-on-surface-variant font-sans mt-0.5">
-                            Live daylight orientation clock for the bedside
-                          </p>
+                          <span
+                            className="notranslate font-mono text-sm sm:text-lg font-bold text-[#1E4334] tracking-tight tabular-nums select-none"
+                            translate="no"
+                            aria-label="Live orientation clock"
+                          >
+                            {currentTime}
+                          </span>
                         </div>
+                        <p className="text-[11px] sm:text-xs text-[#1A1814]/70 font-sans mt-0.5">
+                          Live daylight orientation clock for the bedside
+                        </p>
                       </div>
 
                       {/* 2 Big Simple Buttons */}
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
-                          <Radio className="w-5 h-5 text-[#1E4334] mb-2" />
-                          <h4 className="text-sm font-semibold text-[#1A1814]">Nostalgia Radio</h4>
-                          <p className="text-xs text-on-surface-variant mt-0.5">Classic Assamese songs</p>
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                        <div className="p-2.5 sm:p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
+                          <Radio className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E4334] mb-1.5 sm:mb-2" />
+                          <h4 className="text-xs sm:text-sm font-semibold text-[#1A1814]">Nostalgia Radio</h4>
+                          <p className="text-[10px] sm:text-xs text-[#1A1814]/65 mt-0.5 leading-tight">Classic Assamese songs</p>
                         </div>
 
-                        <div className="p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
-                          <ImageIcon className="w-5 h-5 text-[#1E4334] mb-2" />
-                          <h4 className="text-sm font-semibold text-[#1A1814]">Family Photos</h4>
-                          <p className="text-xs text-on-surface-variant mt-0.5">Familiar faces &amp; memories</p>
+                        <div className="p-2.5 sm:p-3.5 bg-[#F7F5F0] border border-[#1E4334]/15 rounded-xl">
+                          <ImageIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E4334] mb-1.5 sm:mb-2" />
+                          <h4 className="text-xs sm:text-sm font-semibold text-[#1A1814]">Family Photos</h4>
+                          <p className="text-[10px] sm:text-xs text-[#1A1814]/65 mt-0.5 leading-tight">Familiar faces &amp; memories</p>
                         </div>
                       </div>
 
                       {/* Simple Calm Telemetry */}
-                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15 rounded-xl">
+                      <div className="flex items-center gap-2 text-[11px] sm:text-xs text-[#1E4334] bg-[#1E4334]/5 p-2 sm:p-2.5 border border-[#1E4334]/15 rounded-xl">
                         <ShieldCheck className="w-4 h-4 text-[#1E4334] shrink-0" />
-                        <span>Sundowning status: <strong>Peaceful &amp; Calm (98%)</strong></span>
+                        <span className="leading-snug">Sundowning status: <strong>Peaceful &amp; Calm (98%)</strong></span>
                       </div>
                     </div>
 
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("patient")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
+                      className="w-full mt-3 sm:mt-4 py-2.5 sm:py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
                     >
                       <span>Launch Bedside Surface</span>
                     </button>
@@ -212,52 +212,52 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
                 {/* 2. DOCTOR & ASHA MODE */}
                 {activeRole === "asha" && (
                   <>
-                    <div>
+                    <div className="space-y-3 sm:space-y-3.5">
                       {/* Clean Header */}
-                      <div className="flex items-center justify-between pb-3 border-b border-[#1E4334]/15 mb-4">
+                      <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-[#1E4334]/15">
                         <div>
-                          <h3 className="font-serif text-lg sm:text-xl text-[#1A1814]">
+                          <h3 className="font-serif text-base sm:text-xl text-[#1A1814] font-medium">
                             Frontline Doctor &amp; ASHA Triage
                           </h3>
-                          <p className="text-xs text-on-surface-variant font-sans">
+                          <p className="text-[11px] sm:text-xs text-[#1A1814]/70 font-sans mt-0.5">
                             Door-to-door cognitive screening for rural Northeast
                           </p>
                         </div>
-                        <span className="text-[10px] font-bold text-[#92400E] bg-[#FEF3C7] px-2.5 py-0.5 border border-[#D97706]/30 uppercase tracking-wider rounded-full">
+                        <span className="text-[9px] sm:text-[10px] font-bold text-[#92400E] bg-[#FEF3C7] px-2 sm:px-2.5 py-0.5 border border-[#D97706]/30 uppercase tracking-wider rounded-full shrink-0">
                           100% Offline
                         </span>
                       </div>
 
                       {/* 2 Stat Cards */}
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
-                          <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                        <div className="p-2.5 sm:p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
+                          <div className="text-[9px] sm:text-[10px] uppercase font-semibold text-[#1A1814]/65 mb-0.5">
                             Speech &amp; Motor Test
                           </div>
-                          <div className="font-mono text-xl font-bold text-[#1E4334]">94.2%</div>
-                          <div className="text-[10px] text-[#1E4334]">Stable baseline</div>
+                          <div className="font-mono text-lg sm:text-xl font-bold text-[#1E4334]">94.2%</div>
+                          <div className="text-[9px] sm:text-[10px] text-[#1E4334] font-medium">Stable baseline</div>
                         </div>
 
-                        <div className="p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
-                          <div className="text-[10px] uppercase font-semibold text-on-surface-variant mb-0.5">
+                        <div className="p-2.5 sm:p-3 bg-[#F7F5F0] border border-[#1E4334]/15 text-center rounded-xl">
+                          <div className="text-[9px] sm:text-[10px] uppercase font-semibold text-[#1A1814]/65 mb-0.5">
                             Cultural Cue Recall
                           </div>
-                          <div className="font-mono text-xl font-bold text-[#1E4334]">8 / 10</div>
-                          <div className="text-[10px] text-[#1E4334]">High recognition</div>
+                          <div className="font-mono text-lg sm:text-xl font-bold text-[#1E4334]">8 / 10</div>
+                          <div className="text-[9px] sm:text-[10px] text-[#1E4334] font-medium">High recognition</div>
                         </div>
                       </div>
 
                       {/* Report summary */}
-                      <div className="flex items-center gap-2 text-xs text-[#1E4334] bg-[#1E4334]/5 p-2.5 border border-[#1E4334]/15 rounded-xl">
+                      <div className="flex items-center gap-2 text-[11px] sm:text-xs text-[#1E4334] bg-[#1E4334]/5 p-2 sm:p-2.5 border border-[#1E4334]/15 rounded-xl">
                         <FileCheck2 className="w-4 h-4 text-[#1E4334] shrink-0" />
-                        <span>Bilingual clinical summary ready for doctor review</span>
+                        <span className="leading-snug">Bilingual clinical summary ready for doctor review</span>
                       </div>
                     </div>
 
                     {/* Action Button */}
                     <button
                       onClick={() => onOpenRoleModal("asha")}
-                      className="w-full py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-[#C8F028] font-semibold text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
+                      className="w-full mt-3 sm:mt-4 py-2.5 sm:py-3.5 px-4 bg-[#1E4334] hover:bg-[#142F24] text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center cursor-pointer shadow-md rounded-xl active:scale-[0.99]"
                     >
                       <span>Preview Clinical Triage Tool</span>
                     </button>
@@ -267,7 +267,7 @@ export default function Hero({ onOpenRoleModal, onScrollTo, isReady = false }: H
               </div>
               
               {/* Bottom Subtle Hint */}
-              <div className="bg-[#F7F5F0] border-t border-[#1E4334]/15 px-4 py-2 text-center text-[11px] text-on-surface-variant font-medium shrink-0">
+              <div className="bg-[#F7F5F0] border-t border-[#1E4334]/15 px-3 sm:px-4 py-2 text-center text-[10px] sm:text-[11px] text-[#1A1814]/70 font-medium shrink-0 leading-tight">
                 Switch tabs above to preview the Elder Bedside Tablet and Clinical Triage modes
               </div>
 

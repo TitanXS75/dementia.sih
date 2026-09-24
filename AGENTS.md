@@ -16,3 +16,6 @@ Before implementing any feature, refactoring code, altering layouts, or writing 
    - **Square Image Framing**: Images and photo thumbnails must have square corners (`rounded-none`).
    - **Authentic Indian Imagery Only**: Always use authentic Indian and Northeast Indian documentary photography.
    - **No Heart Icons**: Do not use heart icons in clinical, landing, tab favicon, or footer sections; use dignified context-specific icons (`SunMedium`, `BookOpen`, `ShieldCheck`).
+
+3. **Build & Terminal Commands**:
+   - **DO NOT run `npm run build`** automatically. Never run production build checks unless the user explicitly requests it.
