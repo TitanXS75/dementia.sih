@@ -78,6 +78,24 @@ export default function App() {
     return "home";
   });
 
+  // Re-sync Lenis dimensions and smooth scroll whenever view changes or site finishes preloading
+  useEffect(() => {
+    const lenis = (window as any).__lenis;
+    if (!lenis) return;
+
+    if (!isAnyModalOpen) {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      lenis.start();
+    }
+
+    const timer = setTimeout(() => {
+      lenis.resize();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [currentView, isSiteLoaded, isAnyModalOpen]);
+
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
@@ -173,7 +191,7 @@ export default function App() {
 
   // Main Landing Page (Zero Fake Claims, No Inlined FAQs)
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans selection:bg-[#1E4334] selection:text-[#C8F028]">
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1814] font-sans selection:bg-[#1E4334] selection:text-[#FAF7F2]">
       <Preloader onComplete={() => setIsSiteLoaded(true)} />
 
       {/* 1. Sticky Navigation Bar */}
@@ -192,6 +210,7 @@ export default function App() {
           isReady={isSiteLoaded}
           onOpenRoleModal={handleOpenRoleModal}
           onScrollTo={handleScrollTo}
+          onNavigateLogin={navigateToLogin}
         />
 
         {/* 3. Second Section: Fits completely in 1 view on desktop/laptop */}
