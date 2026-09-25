@@ -196,3 +196,51 @@ div.skiptranslate:not(.google-translate-container):not(.translate-widget),
   overflow: hidden !important;
   z-index: -9999 !important;
 }
+
+/* =============================================================================
+   Interior App — Animations & Utilities
+   ============================================================================= */
+
+/* Fade in for game encouragements */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.35s ease-out;
+}
+
+/* Calming mode floating orbs */
+@keyframes calming-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(20px, -15px) scale(1.05); }
+  66%      { transform: translate(-10px, 10px) scale(0.95); }
+}
+@keyframes calming-float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-15px, -20px) scale(1.08); }
+}
+@keyframes calming-float-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(15px, 15px) scale(0.92); }
+}
+.animate-calming-float         { animation: calming-float 12s ease-in-out infinite; }
+.animate-calming-float-slow    { animation: calming-float-slow 18s ease-in-out infinite; }
+.animate-calming-float-reverse { animation: calming-float-reverse 15s ease-in-out infinite; }
+
+/* Breathing circle */
+@keyframes breathing {
+  0%, 100% { transform: scale(1);    opacity: 0.5; }
+  50%      { transform: scale(1.25); opacity: 0.9; }
+}
+.animate-breathing {
+  animation: breathing 6s ease-in-out infinite;
+}
+
+/* Hide horizontal scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Safe area insets for PWA */
+.safe-area-top    { padding-top: env(safe-area-inset-top, 0px); }
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }

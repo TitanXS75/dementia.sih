@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PainPointsSection from "./components/PainPointsSection";
@@ -21,6 +22,7 @@ import { ToolExecutionResult } from "./lib/edge-ai/edgeEngine";
 import { Mic } from "lucide-react";
 
 export default function App() {
+  const routerNavigate = useNavigate();
   const [isSiteLoaded, setIsSiteLoaded] = useState(false);
 
   // Lenis Butter-Smooth Inertia Scroll
@@ -71,10 +73,8 @@ export default function App() {
     }
   }, [isAnyModalOpen]);
 
-  const [currentView, setCurrentView] = useState<"home" | "faq" | "login" | "signup">(() => {
+  const [currentView, setCurrentView] = useState<"home" | "faq">(() => {
     if (window.location.hash === "#faq") return "faq";
-    if (window.location.hash === "#login") return "login";
-    if (window.location.hash === "#signup") return "signup";
     return "home";
   });
 
@@ -102,13 +102,7 @@ export default function App() {
       if (hash === "#faq") {
         setCurrentView("faq");
         window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (hash === "#login") {
-        setCurrentView("login");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (hash === "#signup") {
-        setCurrentView("signup");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (["faq", "login", "signup"].includes(currentView)) {
+      } else if (["faq"].includes(currentView)) {
         setCurrentView("home");
       }
     };
@@ -149,15 +143,11 @@ export default function App() {
   };
 
   const navigateToLogin = () => {
-    setCurrentView("login");
-    window.location.hash = "#login";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    routerNavigate("/login");
   };
 
   const navigateToSignup = () => {
-    setCurrentView("signup");
-    window.location.hash = "#signup";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    routerNavigate("/signup");
   };
 
   // Dedicated Separate FAQ Page View
@@ -179,15 +169,8 @@ export default function App() {
     );
   }
 
-  // Auth Page (Login & Signup combined)
-  if (currentView === "login" || currentView === "signup") {
-    return (
-      <AuthPage
-        initialMode={currentView}
-        onNavigateHome={navigateToHome}
-      />
-    );
-  }
+  // Auth is now handled by React Router — no need for auth view here
+
 
   // Main Landing Page (Zero Fake Claims, No Inlined FAQs)
   return (

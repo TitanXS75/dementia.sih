@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Eye,
   EyeOff,
@@ -9,10 +10,13 @@ import {
   BookOpen,
   CheckCircle2,
   Home,
+  Sparkles,
 } from "lucide-react";
 import { signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db, googleProvider, isFirebaseConfigured } from "../firebase";
+import { useAuth } from "../lib/useAuth";
+import QuickRoleLogin from "./QuickRoleLogin";
 
 type AuthMode = "login" | "signup";
 type Role = "family" | "asha" | "patient";
@@ -49,6 +53,8 @@ function getPasswordStrength(val: string): { level: 0 | 1 | 2 | 3; label: string
 const strengthColors = ["", "#B24A2B", "#D97706", "#1B382B"];
 
 export default function AuthPage({ initialMode = "login", onNavigateHome }: AuthPageProps) {
+  const navigate = useNavigate();
+  const { login: authLogin } = useAuth();
   const [mode, setMode] = useState<AuthMode>(initialMode);
 
   function switchMode(next: AuthMode) {
@@ -101,6 +107,14 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
     setTimeout(() => {
       setLSubmitting(false);
       setLSubmitted(true);
+      // Save user session and redirect to interior app
+      authLogin({
+        name: lEmail.split("@")[0],
+        email: lEmail,
+        role: "patient",
+        language: "en",
+      });
+      navigate("/app/home");
     }, 700);
   }
 
@@ -176,6 +190,14 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
     setTimeout(() => {
       setSSubmitting(false);
       setSSubmitted(true);
+      // Save user session and redirect to interior app
+      authLogin({
+        name: sName || sEmail.split("@")[0],
+        email: sEmail,
+        role: sRole,
+        language: "en",
+      });
+      navigate("/app/home");
     }, 700);
   }
 
@@ -185,11 +207,13 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
     try {
       if (!isFirebaseConfigured || !auth || !googleProvider || !db) {
         console.info("SmritiSetu: Local demo mode active (Firebase unconfigured).");
-        if (mode === "login") {
-          setLSubmitted(true);
-        } else {
-          setSSubmitted(true);
-        }
+        authLogin({
+          name: mode === "signup" ? (sName || "Guest") : (lEmail ? lEmail.split("@")[0] : "Guest"),
+          email: mode === "signup" ? sEmail : lEmail || "guest@demo.local",
+          role: mode === "signup" ? sRole : "patient",
+          language: "en",
+        });
+        navigate("/app/home");
         return;
       }
 
@@ -210,11 +234,15 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
         });
       }
 
-      if (mode === "login") {
-        setLSubmitted(true);
-      } else {
-        setSSubmitted(true);
-      }
+      // Save user session from Firebase and redirect
+      authLogin({
+        name: user.displayName || "User",
+        email: user.email || "",
+        role: mode === "signup" ? sRole : "patient",
+        language: "en",
+        avatar: user.photoURL || undefined,
+      });
+      navigate("/app/home");
     } catch (error: any) {
       console.error("Google Auth Error:", error);
       const errMessage = error.message || "Google authentication failed. Please try again.";
@@ -312,6 +340,30 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
                 ? "Sign in to continue supporting your loved one."
                 : "Join families and healthcare workers in Assam & Northeast India."}
             </p>
+          </div>
+
+          {/* Quick Demo Access (1-Click Login for All Roles) */}
+          <div className="mb-4 bg-white border border-[#1B382B]/15 p-3.5 rounded-2xl shadow-xs">
+            <div className="flex items-center justify-between mb-2.5 px-0.5">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#E58A18]" />
+                <span className="text-[11px] font-bold text-[#1B382B] uppercase tracking-wider">
+                  Quick Role Access
+                </span>
+              </div>
+              <span className="text-[10px] text-[#1B382B] bg-[#1B382B]/5 px-2 py-0.5 rounded font-semibold">
+                Instant 1-Click Browse
+              </span>
+            </div>
+            <QuickRoleLogin compact={true} />
+          </div>
+
+          <div className="flex items-center gap-2 mb-3">
+            <div className="flex-1 h-px bg-[#1B382B]/10" />
+            <span className="text-[10px] text-[#1F1914]/40 uppercase tracking-widest font-semibold">
+              or sign in with credentials
+            </span>
+            <div className="flex-1 h-px bg-[#1B382B]/10" />
           </div>
 
           {/* Mode Switcher Tab (Compact & Rounded) */}

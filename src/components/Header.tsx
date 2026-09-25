@@ -67,7 +67,7 @@ export default function Header({
             onClick={() => {
               if (onNavigateFaq) onNavigateFaq();
             }}
-            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium text-[#1A1814]/75 hover:text-[#1E4334] hover:bg-[#1E4334]/5 transition-all cursor-pointer"
           >
             FAQs
           </button>
@@ -91,7 +91,7 @@ export default function Header({
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-full text-[#1A1814] hover:bg-white border border-[#1E4334]/15 focus:outline-none"
+            className="lg:hidden p-2.5 rounded-full text-[#1A1814] hover:bg-white border border-[#1E4334]/15 focus:outline-none cursor-pointer"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
