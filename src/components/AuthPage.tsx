@@ -18,7 +18,7 @@ import { auth, db, googleProvider, isFirebaseConfigured } from "../firebase";
 import { useAuth } from "../lib/useAuth";
 import QuickRoleLogin from "./QuickRoleLogin";
 
-type AuthMode = "login" | "signup";
+type AuthMode = "login" | "signup" | "quick";
 type Role = "family" | "asha" | "patient";
 
 const ROLES: { id: Role; label: string; desc: string }[] = [
@@ -59,7 +59,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
 
   function switchMode(next: AuthMode) {
     setMode(next);
-    window.history.replaceState(null, "", next === "login" ? "#login" : "#signup");
+    window.history.replaceState(null, "", next === "login" ? "#login" : next === "signup" ? "#signup" : "#quick");
     resetLogin();
     resetSignup();
   }
@@ -259,6 +259,8 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
   }, [initialMode]);
 
   const isLogin = mode === "login";
+  const isSignup = mode === "signup";
+  const isQuick = mode === "quick";
 
   return (
     <div className="h-screen w-full bg-[#FAF7F2] flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden font-sans selection:bg-[#1B382B] selection:text-[#FAF7F2]">
@@ -310,7 +312,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
       </div>
 
       {/* ── Right Column: Compact 1-View Form on Desktop ── */}
-      <div className="w-full lg:w-7/12 xl:w-1/2 flex flex-col justify-between p-4 sm:p-6 lg:p-8 xl:p-10 h-full overflow-y-auto lg:overflow-hidden bg-[#FAF7F2]">
+      <div className="w-full lg:w-7/12 xl:w-1/2 flex flex-col justify-between p-3 sm:p-5 lg:p-6 h-full overflow-y-auto bg-[#FAF7F2]">
 
         {/* Mobile Header: Website Name (Top Left) & Home Button with Home Icon (Top Right) */}
         <div className="lg:hidden flex items-center justify-between pb-3 border-b border-[#1B382B]/10 shrink-0">
@@ -327,48 +329,30 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
           </button>
         </div>
 
-        {/* Vertically Centered 1-View Form Card Container */}
-        <div className="max-w-[430px] w-full mx-auto my-auto flex flex-col justify-center py-2">
+        {/* Form Card Container */}
+        <div className="max-w-[430px] w-full mx-auto my-auto flex flex-col justify-center py-4">
 
           {/* Form Header */}
-          <div className="mb-3.5 text-center sm:text-left">
+          <div className="mb-4 text-center sm:text-left">
             <h1 className="font-serif text-2xl sm:text-3xl font-normal text-[#1B382B] leading-tight">
-              {isLogin ? "Welcome back" : "Create your account"}
+              {isQuick
+                ? "Quick sign-in"
+                : isLogin
+                ? "Welcome back"
+                : "Create your account"}
             </h1>
-            <p className="text-xs text-[#1F1914]/65 mt-0.5 leading-normal">
-              {isLogin
+            <p className="text-xs sm:text-sm text-[#1F1914]/65 mt-1 leading-normal">
+              {isQuick
+                ? "Choose any preconfigured role to instantly explore and browse."
+                : isLogin
                 ? "Sign in to continue supporting your loved one."
                 : "Join families and healthcare workers in Assam & Northeast India."}
             </p>
           </div>
 
-          {/* Quick Demo Access (1-Click Login for All Roles) */}
-          <div className="mb-4 bg-white border border-[#1B382B]/15 p-3.5 rounded-2xl shadow-xs">
-            <div className="flex items-center justify-between mb-2.5 px-0.5">
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#E58A18]" />
-                <span className="text-[11px] font-bold text-[#1B382B] uppercase tracking-wider">
-                  Quick Role Access
-                </span>
-              </div>
-              <span className="text-[10px] text-[#1B382B] bg-[#1B382B]/5 px-2 py-0.5 rounded font-semibold">
-                Instant 1-Click Browse
-              </span>
-            </div>
-            <QuickRoleLogin compact={true} />
-          </div>
-
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex-1 h-px bg-[#1B382B]/10" />
-            <span className="text-[10px] text-[#1F1914]/40 uppercase tracking-widest font-semibold">
-              or sign in with credentials
-            </span>
-            <div className="flex-1 h-px bg-[#1B382B]/10" />
-          </div>
-
-          {/* Mode Switcher Tab (Compact & Rounded) */}
+          {/* Mode Switcher Tabs: Sign in, Create account, Quick signin */}
           <div
-            className="flex p-1 border border-[#1B382B]/15 bg-[#FAF7F2] rounded-xl mb-3 overflow-hidden shrink-0"
+            className="flex p-1 border border-[#1B382B]/15 bg-[#FAF7F2] rounded-xl mb-4 overflow-hidden shrink-0"
             role="tablist"
             aria-label="Authentication mode"
           >
@@ -377,7 +361,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
               role="tab"
               aria-selected={isLogin}
               onClick={() => switchMode("login")}
-              className={`flex-1 py-2 text-xs font-semibold tracking-wide rounded-lg transition-all ${
+              className={`flex-1 py-2 text-xs sm:text-sm font-semibold tracking-wide rounded-lg transition-all cursor-pointer ${
                 isLogin
                   ? "bg-[#1B382B] text-white shadow-xs"
                   : "text-[#1F1914]/65 hover:text-[#1B382B] hover:bg-[#1B382B]/5"
@@ -388,20 +372,34 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
             <button
               id="auth-tab-signup"
               role="tab"
-              aria-selected={!isLogin}
+              aria-selected={isSignup}
               onClick={() => switchMode("signup")}
-              className={`flex-1 py-2 text-xs font-semibold tracking-wide rounded-lg transition-all ${
-                !isLogin
+              className={`flex-1 py-2 text-xs sm:text-sm font-semibold tracking-wide rounded-lg transition-all cursor-pointer ${
+                isSignup
                   ? "bg-[#1B382B] text-white shadow-xs"
                   : "text-[#1F1914]/65 hover:text-[#1B382B] hover:bg-[#1B382B]/5"
               }`}
             >
               Create account
             </button>
+            <button
+              id="auth-tab-quick"
+              role="tab"
+              aria-selected={isQuick}
+              onClick={() => switchMode("quick")}
+              className={`flex-1 py-2 text-xs sm:text-sm font-semibold tracking-wide rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                isQuick
+                  ? "bg-[#1B382B] text-white shadow-xs"
+                  : "text-[#1F1914]/65 hover:text-[#1B382B] hover:bg-[#1B382B]/5"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#E58A18]" />
+              <span>Quick signin</span>
+            </button>
           </div>
 
           {/* Form Card Content */}
-          <div className="bg-white border border-[#1B382B]/15 p-4 sm:p-5 shadow-sm rounded-2xl">
+          <div className="bg-white border border-[#1B382B]/15 p-5 sm:p-6 shadow-sm rounded-2xl">
 
             {/* Success States */}
             {isLogin && lSubmitted ? (
@@ -420,7 +418,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
                   Return to Dashboard
                 </button>
               </div>
-            ) : !isLogin && sSubmitted ? (
+            ) : isSignup && sSubmitted ? (
               <div className="text-center py-4">
                 <div className="w-12 h-12 bg-[#1B382B] rounded-full flex items-center justify-center mx-auto mb-2.5">
                   <BookOpen className="w-6 h-6 text-[#E58A18]" />
@@ -436,12 +434,15 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
                   Go to sign in
                 </button>
               </div>
+            ) : isQuick ? (
+              /* ════════ QUICK SIGNIN TAB (Short & Simple) ════════ */
+              <QuickRoleLogin layout="stack" />
             ) : isLogin ? (
-              /* ════════ LOGIN FORM (Fits easily in 1 view) ════════ */
-              <form onSubmit={handleLoginSubmit} noValidate className="flex flex-col gap-2.5">
+              /* ════════ LOGIN FORM (Restored as it was) ════════ */
+              <form onSubmit={handleLoginSubmit} noValidate className="flex flex-col gap-3.5">
                 {lErrors.form && (
-                  <div className="border border-[#B24A2B]/40 bg-[#FBECE7] px-3 py-2 text-xs text-[#B24A2B] flex items-center gap-1.5 rounded-xl">
-                    <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                  <div className="border border-[#B24A2B]/40 bg-[#FBECE7] px-3 py-2 text-xs text-[#B24A2B] flex items-center gap-2 rounded-xl">
+                    <ShieldCheck className="w-4 h-4 shrink-0" />
                     <span>{lErrors.form}</span>
                   </div>
                 )}
@@ -520,7 +521,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
                 </button>
 
                 {/* Divider */}
-                <div className="flex items-center gap-2 my-0.5">
+                <div className="flex items-center gap-2 my-1">
                   <div className="flex-1 h-px bg-[#1B382B]/10" />
                   <span className="text-[10px] text-[#1F1914]/40 uppercase tracking-widest font-semibold">or</span>
                   <div className="flex-1 h-px bg-[#1B382B]/10" />
@@ -740,7 +741,7 @@ export default function AuthPage({ initialMode = "login", onNavigateHome }: Auth
           </div>
 
           {/* Micro Trust footnote */}
-          <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-[#1F1914]/50">
+          <div className="mt-3.5 flex items-center justify-center gap-1.5 text-xs text-[#1F1914]/55">
             <ShieldCheck className="w-3.5 h-3.5 text-[#1B382B]" />
             <span>Secure. Private. Built for Northeast Indian families.</span>
           </div>

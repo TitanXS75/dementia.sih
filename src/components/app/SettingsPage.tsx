@@ -33,7 +33,7 @@ export default function SettingsPage() {
     languages.find((l) => l.code === user?.language)?.label ?? "English";
 
   return (
-    <div className="space-y-5">
+    <div className="max-w-3xl space-y-5">
       <div>
         <h1 className="font-serif text-xl text-[#1B382B] font-medium">
           Settings
@@ -154,13 +154,13 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {/* Sign Out */}
+      {/* Sign Out Button - Bright & High-Contrast */}
       <button
         onClick={handleLogout}
-        className="w-full flex items-center justify-center gap-2 px-4 py-3.5 bg-[#B24A2B]/8 border border-[#B24A2B]/15 rounded-2xl text-[#B24A2B] font-sans text-sm font-semibold hover:bg-[#B24A2B]/12 transition-colors"
+        className="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 bg-[#B24A2B] hover:bg-[#963C21] text-white shadow-sm font-sans text-sm font-semibold rounded-2xl transition-all active:scale-[0.99] cursor-pointer"
       >
-        <LogOut className="w-4 h-4" />
-        Sign Out
+        <LogOut className="w-4 h-4 text-white" />
+        <span>Sign Out</span>
       </button>
 
       {/* App version */}

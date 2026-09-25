@@ -1,6 +1,5 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Users, Stethoscope, ArrowRight } from "lucide-react";
+import { User, Users, Stethoscope } from "lucide-react";
 import { useAuth } from "../lib/useAuth";
 import { DEMO_ACCOUNTS, DemoAccount } from "../lib/demoAccounts";
 
@@ -12,7 +11,7 @@ interface QuickRoleLoginProps {
 
 export default function QuickRoleLogin({
   onSuccess,
-  layout = "stack",
+  layout = "grid",
   compact = false,
 }: QuickRoleLoginProps) {
   const navigate = useNavigate();
@@ -32,13 +31,13 @@ export default function QuickRoleLogin({
   const getRoleIcon = (role: string) => {
     switch (role) {
       case "patient":
-        return <User className="w-4 h-4 text-[#D97706]" />;
+        return <User className="w-3.5 h-3.5 text-[#D97706]" />;
       case "family":
-        return <Users className="w-4 h-4 text-[#1B382B]" />;
+        return <Users className="w-3.5 h-3.5 text-[#1B382B]" />;
       case "asha":
-        return <Stethoscope className="w-4 h-4 text-[#B24A2B]" />;
+        return <Stethoscope className="w-3.5 h-3.5 text-[#B24A2B]" />;
       default:
-        return <User className="w-4 h-4 text-[#1B382B]" />;
+        return <User className="w-3.5 h-3.5 text-[#1B382B]" />;
     }
   };
 
@@ -70,45 +69,40 @@ export default function QuickRoleLogin({
 
   if (compact) {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {DEMO_ACCOUNTS.map((account) => (
           <button
             key={account.role}
             type="button"
             onClick={() => handleSelectRole(account)}
-            className="group w-full flex items-center justify-between p-3 rounded-xl border border-[#1B382B]/12 bg-[#FAF7F2] hover:bg-white hover:border-[#1B382B]/35 hover:shadow-xs transition-all text-left cursor-pointer active:scale-[0.99]"
+            className="group flex flex-col items-center justify-between p-2 rounded-xl border border-[#1B382B]/15 bg-[#FAF7F2] hover:bg-white hover:border-[#1B382B]/40 hover:shadow-xs transition-all text-center cursor-pointer active:scale-95"
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div
-                className={`w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform ${getRoleIconBg(
+            <div
+              className={`w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 mb-1 group-hover:scale-105 transition-transform ${getRoleIconBg(
+                account.role
+              )}`}
+            >
+              {getRoleIcon(account.role)}
+            </div>
+
+            <div className="w-full min-w-0">
+              <span className="text-[11px] font-bold text-[#1B382B] leading-tight block truncate">
+                {account.role === "patient"
+                  ? "Elder Patient"
+                  : account.role === "family"
+                    ? "Caregiver"
+                    : "Clinician / ASHA"}
+              </span>
+              <span
+                className={`text-[8px] uppercase tracking-wider px-1 py-0.2 border rounded font-semibold inline-block mt-0.5 ${getRoleBadgeStyle(
                   account.role
                 )}`}
               >
-                {getRoleIcon(account.role)}
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#1B382B] truncate">
-                    {account.roleLabel}
-                  </span>
-                  <span
-                    className={`text-[9px] uppercase tracking-wider px-1.5 py-0.2 border rounded-md font-semibold ${getRoleBadgeStyle(
-                      account.role
-                    )}`}
-                  >
-                    {account.badge}
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#1F1914]/65 truncate font-sans mt-0.5">
-                  <span className="font-medium text-[#1F1914]">{account.name}</span>
-                  <span className="text-[#1F1914]/40 mx-1">•</span>
-                  <span>{account.subtitle}</span>
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-1 shrink-0 ml-2 text-[10px] font-semibold text-[#1F1914]/40 group-hover:text-[#1B382B] transition-colors">
-              <span className="hidden sm:inline">Enter</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                {account.badge}
+              </span>
+              <p className="text-[9px] text-[#1F1914]/55 truncate mt-0.5">
+                {account.name.split(" ")[0]}
+              </p>
             </div>
           </button>
         ))}
@@ -129,45 +123,34 @@ export default function QuickRoleLogin({
           key={account.role}
           type="button"
           onClick={() => handleSelectRole(account)}
-          className="group flex flex-col justify-between p-3.5 rounded-xl border border-[#1B382B]/15 bg-white hover:border-[#1B382B]/40 hover:shadow-sm transition-all text-left cursor-pointer active:scale-[0.99]"
+          className="group flex items-center justify-between p-3 rounded-xl border border-[#1B382B]/15 bg-[#FAF7F2] hover:bg-white hover:border-[#1B382B]/40 hover:shadow-xs transition-all text-left cursor-pointer active:scale-[0.99]"
         >
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-1.5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform ${getRoleIconBg(
+                account.role
+              )}`}
+            >
+              {getRoleIcon(account.role)}
+            </div>
+
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <div
-                  className={`w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 ${getRoleIconBg(
+                <span className="text-xs font-bold text-[#1B382B] truncate">
+                  {account.roleLabel}
+                </span>
+                <span
+                  className={`text-[9px] uppercase tracking-wider px-1.5 py-0.2 border rounded font-semibold shrink-0 ${getRoleBadgeStyle(
                     account.role
                   )}`}
                 >
-                  {getRoleIcon(account.role)}
-                </div>
-                <span className="text-xs font-bold text-[#1B382B]">
-                  {account.roleLabel}
+                  {account.badge}
                 </span>
               </div>
-              <span
-                className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 border rounded-md font-semibold ${getRoleBadgeStyle(
-                  account.role
-                )}`}
-              >
-                {account.badge}
-              </span>
+              <p className="text-[11px] text-[#1F1914]/65 truncate">
+                {account.name}
+              </p>
             </div>
-
-            <p className="text-xs font-medium text-[#1F1914] mb-0.5">
-              {account.name}
-            </p>
-            <p className="text-[10px] text-[#1F1914]/50 mb-2">
-              {account.subtitle}
-            </p>
-            <p className="text-[11px] text-[#1F1914]/75 line-clamp-2 leading-relaxed">
-              {account.description}
-            </p>
-          </div>
-
-          <div className="mt-3 pt-2 border-t border-[#1B382B]/8 flex items-center justify-between text-[11px] font-semibold text-[#1B382B] group-hover:text-[#D97706] transition-colors">
-            <span>Enter as {account.roleLabel.split(" ")[0]}</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
         </button>
       ))}
