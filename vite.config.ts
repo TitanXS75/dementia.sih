@@ -31,6 +31,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6 MB
         globPatterns: ["**/*.{js,css,html,ico,png,jpg,svg,woff2}"],
         runtimeCaching: [
           {
@@ -55,6 +56,24 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    chunkSizeWarningLimit: 2500,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "firebase-vendor": [
+            "firebase/app",
+            "firebase/auth",
+            "firebase/firestore",
+            "firebase/storage",
+          ],
+          "transformers-vendor": ["@xenova/transformers"],
+          "icons-vendor": ["lucide-react"],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
